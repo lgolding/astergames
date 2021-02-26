@@ -1,4 +1,5 @@
 import express from 'express';
+import HttpStatus from '../../HttpStatus';
 import Game from '../../models/Game';
 
 const router = express.Router();
@@ -26,7 +27,7 @@ router.post('/', async (req, res) => {
 
   try {
     const createdGame = await newGame.save();
-    res.status(201).json(createdGame);
+    res.status(HttpStatus.Created).json(createdGame);
   } catch (err) {
     console.log(`Failed to POST a game: ${err}`);
   }
