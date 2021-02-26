@@ -1,0 +1,11 @@
+env:
+  node: true
+extends:
+  - ../.eslintrc.yml
+  - prettier
+plugins:
+  - '@typescript-eslint'
+  - eslint-plugin-prettier
+parser: '@typescript-eslint/parser'
+ignorePatterns:
+  - dist/
