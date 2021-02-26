@@ -15,4 +15,21 @@ router.get('/', async (_req, res) => {
   }
 });
 
+// @route POST api/games
+// @desc Creates a game
+// @access Public
+router.post('/', async (req, res) => {
+  const newGame = new Game({
+    player1: req.body.player1,
+    player2: req.body.player2,
+  });
+
+  try {
+    const createdGame = await newGame.save();
+    res.status(201).json(createdGame);
+  } catch (err) {
+    console.log(`Failed to POST a game: ${err}`);
+  }
+});
+
 export default router;
