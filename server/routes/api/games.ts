@@ -13,6 +13,7 @@ router.get('/', async (_req, res) => {
     res.json(games);
   } catch (err) {
     console.log(`Failed to GET games: ${err}`);
+    res.status(HttpStatus.InternalServerError);
   }
 });
 
@@ -30,6 +31,7 @@ router.post('/', async (req, res) => {
     res.status(HttpStatus.Created).json(createdGame);
   } catch (err) {
     console.log(`Failed to POST a game: ${err}`);
+    res.status(HttpStatus.InternalServerError);
   }
 });
 
