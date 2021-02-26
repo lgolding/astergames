@@ -1,0 +1,15 @@
+{
+  "name": "@larrygolding/astergames-server",
+  "version": "0.0.0",
+  "description": "Web server for the AsterGames web site.",
+  "license": "MIT",
+  "author": "Laurence J. Golding",
+  "repository": "github:lgolding/astergames",
+  "bugs": "https://github.com/lgolding/astergames/issues",
+  "homepage": "https://github.com/lgolding/astergames#readme",
+  "keywords": [],
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
