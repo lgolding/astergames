@@ -9,7 +9,7 @@ const router = express.Router();
 // @access Public
 router.get('/', async (_req, res) => {
   try {
-    let games = await Game.find().sort({ date: -1 });
+    const games = await Game.find().sort({ date: -1 });
     res.json(games);
   } catch (err) {
     console.log(`Failed to GET games: ${err}`);
