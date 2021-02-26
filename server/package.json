@@ -8,9 +8,9 @@
   "bugs": "https://github.com/lgolding/astergames/issues",
   "homepage": "https://github.com/lgolding/astergames#readme",
   "keywords": [],
-  "main": "index.js",
+  "main": "./dist/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "tsc --watch"
   },
   "devDependencies": {
     "typescript": "^4.2.2"
