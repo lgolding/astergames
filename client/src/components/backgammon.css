@@ -1,0 +1,27 @@
+.board {
+  background-color: rgb(100, 30, 30);
+  margin-top: 10px;
+  margin-left: 33vw;
+  height: 33vw;
+  width: 33vw;
+
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(13, 1fr);
+  grid-template-rows: 1fr 1fr;
+}
+
+.point-dark {
+  background-color: rgb(61, 33, 13);
+}
+
+.point-light {
+  background-color: bisque;
+}
+
+.bar {
+  background-color: rgb(167, 101, 39);
+  grid-column: 7;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
