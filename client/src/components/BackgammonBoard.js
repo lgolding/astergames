@@ -1,37 +1,38 @@
 import './backgammon.css';
+import Point from './Point';
 
 const BackgammonBoard = () => {
   return (
     <div className='board'>
-      <div className='point point-dark'></div>
-      <div className='point point-light'></div>
-      <div className='point point-dark'></div>
-      <div className='point point-light'></div>
-      <div className='point point-dark'></div>
-      <div className='point point-light'></div>
+      <Point colorClass='point-dark' />
+      <Point colorClass='point-light' />
+      <Point colorClass='point-dark' />
+      <Point colorClass='point-light' />
+      <Point colorClass='point-dark' />
+      <Point colorClass='point-light' />
 
-      <div className='bar'></div>
+      <div className='bar' />
 
-      <div className='point point-dark'></div>
-      <div className='point point-light'></div>
-      <div className='point point-dark'></div>
-      <div className='point point-light'></div>
-      <div className='point point-dark'></div>
-      <div className='point point-light'></div>
+      <Point colorClass='point-dark' />
+      <Point colorClass='point-light' />
+      <Point colorClass='point-dark' />
+      <Point colorClass='point-light' />
+      <Point colorClass='point-dark' />
+      <Point colorClass='point-light' />
 
-      <div className='point point-light'></div>
-      <div className='point point-dark'></div>
-      <div className='point point-light'></div>
-      <div className='point point-dark'></div>
-      <div className='point point-light'></div>
-      <div className='point point-dark'></div>
+      <Point colorClass='point-light' />
+      <Point colorClass='point-dark' />
+      <Point colorClass='point-light' />
+      <Point colorClass='point-dark' />
+      <Point colorClass='point-light' />
+      <Point colorClass='point-dark' />
 
-      <div className='point point-light'></div>
-      <div className='point point-dark'></div>
-      <div className='point point-light'></div>
-      <div className='point point-dark'></div>
-      <div className='point point-light'></div>
-      <div className='point point-dark'></div>
+      <Point colorClass='point-light' />
+      <Point colorClass='point-dark' />
+      <Point colorClass='point-light' />
+      <Point colorClass='point-dark' />
+      <Point colorClass='point-light' />
+      <Point colorClass='point-dark' />
     </div>
   )
 }
