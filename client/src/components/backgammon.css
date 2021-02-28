@@ -1,26 +1,32 @@
+:root {
+  --bar-color: rgb(167, 101, 39);
+  --light-color: bisque;
+  --dark-color: rgb(61, 33, 13);
+}
+
 .board {
-  background-color: rgb(100, 30, 30);
   margin-top: 10px;
   margin-left: 33vw;
   height: 33vw;
   width: 33vw;
 
   display: grid;
-  gap: 1px;
   grid-template-columns: repeat(13, 1fr);
   grid-template-rows: 1fr 1fr;
 }
 
 .point-dark {
-  background-color: rgb(61, 33, 13);
+  background-color: var(--dark-color);
+  color: var(--light-color);
 }
 
 .point-light {
-  background-color: bisque;
+  background-color: var(--light-color);
+  color: var(--dark-color);
 }
 
 .bar {
-  background-color: rgb(167, 101, 39);
+  background-color: var(--bar-color);
   grid-column: 7;
   grid-row-start: 1;
   grid-row-end: 3;
