@@ -1,5 +1,6 @@
 import './backgammon.css';
 import Point from './Point';
+import Bar from './Bar';
 
 const BackgammonBoard = () => {
   return (
@@ -11,7 +12,7 @@ const BackgammonBoard = () => {
       <Point colorClass='point-dark' />
       <Point colorClass='point-light' />
 
-      <div className='bar' />
+      <Bar />
 
       <Point colorClass='point-dark' />
       <Point colorClass='point-light' />
