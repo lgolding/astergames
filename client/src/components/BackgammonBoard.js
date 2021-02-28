@@ -12,7 +12,7 @@ const BackgammonBoard = () => {
   // in the grid, so after rendering the bar, we can render the remaining 18
   // points without interruption.
   return (
-    <div className="board">
+    <div className='board'>
       {indices.slice(0, 6).map(index => (
         <Point index={index} point={game.points[index]} />
       ))}
