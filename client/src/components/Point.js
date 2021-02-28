@@ -1,11 +1,18 @@
-import './backgammon.css';
+import React from 'react'
 
-const Point = ({ colorClass, numLight, numDark }) => {
+const Point = ({index, point}) => {
+  let className;
+  if (index < 12) {
+    className = index % 2 === 0 ? 'point-dark' : 'point-light';
+  } else {
+    className = index % 2 === 0 ? 'point-light' : 'point-dark';
+  }
+
   return (
-    <div className={"point " + colorClass}>
-      {`${numLight}L`}
+    <div className={className}>
+      {`${point.numLight}L`}
       <br/>
-      {`${numDark}D`}
+      {`${point.numDark}L`}
     </div>
   )
 }
