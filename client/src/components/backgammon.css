@@ -1,7 +1,9 @@
 :root {
   --bar-color: rgb(167, 101, 39);
-  --light-color: bisque;
-  --dark-color: rgb(61, 33, 13);
+  --light-point-color: bisque;
+  --dark-point-color: rgb(61, 33, 13);
+  --light-checker-color: white;
+  --dark-checker-color: red;
 }
 
 .board {
@@ -16,13 +18,13 @@
 }
 
 .point-dark {
-  background-color: var(--dark-color);
-  color: var(--light-color);
+  background-color: var(--dark-point-color);
+  color: var(--light-point-color);
 }
 
 .point-light {
-  background-color: var(--light-color);
-  color: var(--dark-color);
+  background-color: var(--light-point-color);
+  color: var(--dark-point-color);
 }
 
 .bar {
@@ -30,4 +32,19 @@
   grid-column: 7;
   grid-row-start: 1;
   grid-row-end: 3;
+}
+
+.checker {
+  width: 50px;
+  height: 50px;
+  margin: 5%;
+  border-radius: 50%;
+}
+
+.checker-light {
+  background-color: var(--light-checker-color);
+}
+
+.checker-dark {
+  background-color: var(--dark-checker-color);
 }
