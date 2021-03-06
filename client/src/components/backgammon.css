@@ -12,18 +12,22 @@
   height: 70vw;
   width: 70vw;
 
+  background-color: rgb(212, 178, 137);
+
   display: grid;
   grid-template-columns: repeat(13, 1fr);
   grid-template-rows: 1fr 1fr;
 }
 
+.point {
+  position: relative;
+}
+
 .point-dark {
-  background-color: var(--dark-point-color);
   color: var(--light-point-color);
 }
 
 .point-light {
-  background-color: var(--light-point-color);
   color: var(--dark-point-color);
 }
 
