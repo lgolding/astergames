@@ -14,15 +14,11 @@ const BackgammonBoard = () => {
   // points without interruption.
   return (
     <div className='board'>
-      {indices.slice(0, POINTS_ON_TABLE).map(pointIndex => (
+      {indices.slice(0, POINTS_ON_BOARD).map(pointIndex => (
         <Point pointIndex={pointIndex} point={game.points[pointIndex]} />
       ))}
 
       <Bar />
-
-      {indices.slice(POINTS_ON_TABLE, POINTS_ON_BOARD).map(pointIndex => (
-        <Point pointIndex={pointIndex} point={game.points[pointIndex]} />
-      ))}
     </div>
   );
 };

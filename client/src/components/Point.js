@@ -2,26 +2,28 @@ import Checker from './Checker';
 import CheckerColor from '../games/CheckerColor';
 import { POINTS_ON_ROW } from '../games/constants';
 
-const POINT_CLASS_NAME = 'point';
-const POINT_TOP_ROW_CLASS_NAME = 'point-top-row';
-const POINT_BOTTOM_ROW_CLASS_NAME = 'point-bottom-row';
 const LIGHT_POINT_CLASS_NAME = 'point-light';
 const DARK_POINT_CLASS_NAME = 'point-dark';
 
 const Point = ({ pointIndex, point }) => {
-  let pointColorClassName;
+  let pointColorClass;
   if (pointIndex < POINTS_ON_ROW) {
-    pointColorClassName =
+    pointColorClass =
       pointIndex % 2 === 0 ? DARK_POINT_CLASS_NAME : LIGHT_POINT_CLASS_NAME;
   } else {
-    pointColorClassName =
+    pointColorClass =
       pointIndex % 2 === 0 ? LIGHT_POINT_CLASS_NAME : DARK_POINT_CLASS_NAME;
   }
 
-  const pointRowClassName =
-    pointIndex < POINTS_ON_ROW
-      ? POINT_TOP_ROW_CLASS_NAME
-      : POINT_BOTTOM_ROW_CLASS_NAME;
+  let pointRow;
+  let pointRowClass;
+  if (pointIndex < POINTS_ON_ROW) {
+    pointRow = '1';
+    pointRowClass = 'point-top-row';
+  } else {
+    pointRow = '3';
+    pointRowClass = 'point-bottom-row';
+  }
 
   const checkerColor =
     point.numLight > 0 ? CheckerColor.LIGHT : CheckerColor.DARK;
@@ -29,15 +31,10 @@ const Point = ({ pointIndex, point }) => {
 
   const checkerIndices = Array.from(new Array(numCheckers).keys());
 
-  const id = `point_${pointIndex}`;
-
   return (
-    <div className='point-container'>
+    <div className='point' style={{ gridRow: pointRow }}>
       <div className='point-background' />
-      <div
-        id={id}
-        className={`${POINT_CLASS_NAME} ${pointRowClassName} ${pointColorClassName}`}
-      >
+      <div className={`checker-container ${pointRowClass} ${pointColorClass}`}>
         {checkerIndices.map(checkerIndex => (
           <Checker
             color={checkerColor}
