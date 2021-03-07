@@ -21,7 +21,7 @@ const Point = ({ pointIndex, point }) => {
     pointRow = 1;
     pointRowClass = 'point-top-row';
   } else {
-    pointRow = 3;
+    pointRow = 2;
     pointRowClass = 'point-bottom-row';
   }
 
@@ -41,9 +41,9 @@ const Point = ({ pointIndex, point }) => {
           preserveAspectRatio='none'
         >
           {pointRow === 1 ? (
-            <polygon points='0,0 50,100 100,0' />
+            <polygon points='0,0 50,85 100,0' />
           ) : (
-            <polygon points='0,100 50,0 100,100' />
+            <polygon points='0,100 50,15 100,100' />
           )}
         </svg>
       </div>
