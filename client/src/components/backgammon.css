@@ -51,11 +51,11 @@
 }
 
 .point-dark {
-  color: var(--light-point-color);
+  fill: var(--dark-point-color);
 }
 
 .point-light {
-  color: var(--dark-point-color);
+  fill: var(--light-point-color);
 }
 
 .bar {

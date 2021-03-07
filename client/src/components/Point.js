@@ -18,10 +18,10 @@ const Point = ({ pointIndex, point }) => {
   let pointRow;
   let pointRowClass;
   if (pointIndex < POINTS_ON_ROW) {
-    pointRow = '1';
+    pointRow = 1;
     pointRowClass = 'point-top-row';
   } else {
-    pointRow = '3';
+    pointRow = 3;
     pointRowClass = 'point-bottom-row';
   }
 
@@ -33,8 +33,21 @@ const Point = ({ pointIndex, point }) => {
 
   return (
     <div className='point' style={{ gridRow: pointRow }}>
-      <div className='point-background' />
-      <div className={`checker-container ${pointRowClass} ${pointColorClass}`}>
+      <div className={`point-background ${pointColorClass}`}>
+        <svg
+          width='100%'
+          height='100%'
+          viewBox='0 0 100 100'
+          preserveAspectRatio='none'
+        >
+          {pointRow === 1 ? (
+            <polygon points='0,0 50,100 100,0' />
+          ) : (
+            <polygon points='0,100 50,0 100,100' />
+          )}
+        </svg>
+      </div>
+      <div className={`checker-container ${pointRowClass}`}>
         {checkerIndices.map(checkerIndex => (
           <Checker
             color={checkerColor}
