@@ -9,9 +9,6 @@ const BackgammonBoard = () => {
   let [game, setGame] = useState(new Game());
   let indices = Array.from(Array(POINTS_ON_BOARD).keys());
 
-  // We render the first 6 points (the top left table). The bar spans two rows
-  // in the grid, so after rendering the bar, we can render the remaining 18
-  // points without interruption.
   return (
     <div className='board'>
       {indices.slice(0, POINTS_ON_BOARD).map(pointIndex => (
