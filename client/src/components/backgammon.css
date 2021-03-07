@@ -19,7 +19,25 @@
   grid-template-rows: 1fr 1fr;
 }
 
+.point-container {
+  position: relative;
+}
+
+.point-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 50px;
+  height: 20px;
+  background-color: green;
+}
+
 .point {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
   display: flex;
   align-items: center;
 }

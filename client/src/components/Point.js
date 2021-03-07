@@ -32,17 +32,20 @@ const Point = ({ pointIndex, point }) => {
   const id = `point_${pointIndex}`;
 
   return (
-    <div
-      id={id}
-      className={`${POINT_CLASS_NAME} ${pointRowClassName} ${pointColorClassName}`}
-    >
-      {checkerIndices.map(checkerIndex => (
-        <Checker
-          color={checkerColor}
-          pointIndex={pointIndex}
-          checkerIndex={checkerIndex}
-        />
-      ))}
+    <div className='point-container'>
+      <div className='point-background' />
+      <div
+        id={id}
+        className={`${POINT_CLASS_NAME} ${pointRowClassName} ${pointColorClassName}`}
+      >
+        {checkerIndices.map(checkerIndex => (
+          <Checker
+            color={checkerColor}
+            pointIndex={pointIndex}
+            checkerIndex={checkerIndex}
+          />
+        ))}
+      </div>
     </div>
   );
 };
