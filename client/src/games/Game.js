@@ -37,6 +37,6 @@ export default class Game {
       new Point(0, 0),
       new Point(0, 0),
       new Point(0, 2),
-    ]
+    ];
   }
 }
