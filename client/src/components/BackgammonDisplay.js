@@ -4,10 +4,11 @@ import Game from '../games/Game';
 
 const BackgammonDisplay = () => {
   let [game, setGame] = useState(new Game());
+  let handleClick = () => alert('click!');
 
   return (
     <>
-      <BackgammonBoard game={game} />
+      <BackgammonBoard game={game} handleClick={handleClick} />
     </>
   );
 };
