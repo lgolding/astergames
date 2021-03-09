@@ -1,12 +1,9 @@
 import './backgammon.css';
-import { useState } from 'react';
 import Point from './Point';
 import Bar from './Bar';
-import Game from '../games/Game';
 import { POINTS_ON_BOARD } from '../games/constants';
 
-const BackgammonBoard = () => {
-  let [game, setGame] = useState(new Game());
+const BackgammonBoard = ({ game }) => {
   let indices = Array.from(Array(POINTS_ON_BOARD).keys());
 
   return (
