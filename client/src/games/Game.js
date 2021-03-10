@@ -2,8 +2,11 @@ import Point from './Point';
 
 export default class Game {
   points;
+  currentPlayer;
 
   constructor() {
+    this.currentPlayer = 0;
+
     // The point indices run in grid layout order, from 0 at the top left to 23
     // at the bottom right. From the point of view of the player at the bottom
     // ("light"), the points run from 24 at the top right to 1 at the bottom
