@@ -42,4 +42,32 @@ export default class Game {
       new Point(0, 2),
     ];
   }
+
+  // TODO: Unit test this logic.
+  tryMove(from, to) {
+    const newGame = { ...this };
+    const fromPoint = newGame.points[from];
+    const toPoint = newGame.points[to];
+    const sourceCheckers =
+      this.currentPlayer === 0 ? fromPoint.numLight : fromPoint.numDark;
+    const destCheckers =
+      this.currentPlayer === 0 ? toPoint.numLight : toPoint.numDark;
+    if (sourceCheckers > 0) {
+      if (this.currentPlayer === 0) {
+        fromPoint.numLight = sourceCheckers - 1;
+        toPoint.numLight = destCheckers + 1;
+      } else {
+        fromPoint.numDark = sourceCheckers - 1;
+        toPoint.numDark = destCheckers + 1;
+      }
+      newGame.currentPlayer = this.currentPlayer === 0 ? 1 : 0;
+      return newGame;
+    } else {
+      throw new Error(
+        `There are no ${
+          this.currentPlayer === 0 ? 'light' : 'dark'
+        } checkers on point ${from}.`
+      );
+    }
+  }
 }
