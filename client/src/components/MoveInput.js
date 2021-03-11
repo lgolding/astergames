@@ -7,9 +7,9 @@ const MoveInput = ({ onMove }) => {
   return (
     <div>
       <label htmlFor='fromPoint'>From</label>
-      <input id='fromPoint' type='number' />
+      <input id='fromPoint' type='number' required />
       <label htmlFor='fromPoint'>To</label>
-      <input id='toPoint' type='number' />
+      <input id='toPoint' type='number' required />
       <button onClick={clickHandler}>Move</button>
     </div>
   );
