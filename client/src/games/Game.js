@@ -43,7 +43,6 @@ export default class Game {
     ];
   }
 
-  // TODO: Unit test this logic.
   tryMove(from, to) {
     const fromPoint = this.points[from];
     const toPoint = this.points[to];
@@ -52,11 +51,11 @@ export default class Game {
     const destCheckers = toPoint.numCheckers[this.currentPlayer];
 
     if (sourceCheckers === 0) {
-      throw new Error(
-        `There are no ${
-          this.currentPlayer === 0 ? 'light' : 'dark'
-        } checkers on point ${from}.`
-      );
+      throw new Error('Cannot move from a point you do not occupy.');
+    }
+
+    if (from === to) {
+      throw new Error('Cannot move to the point you started from.');
     }
 
     const opponent = 1 - this.currentPlayer;
@@ -64,7 +63,7 @@ export default class Game {
     const opponentDestCheckers = toPoint.numCheckers[opponent];
     if (opponentDestCheckers > 1) {
       throw new Error(
-        'Cannot move to a point occupied by two or more opponent checkers.'
+        'Cannot move to a point non-blot point occupied by the opponent.'
       );
     }
 
