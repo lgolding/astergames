@@ -45,34 +45,28 @@ export default class Game {
 
   // TODO: Unit test this logic.
   tryMove(from, to) {
-    const newGame = this.clone();
-    const fromPoint = newGame.points[from];
-    const toPoint = newGame.points[to];
-    const sourceCheckers =
-      this.currentPlayer === 0
-        ? fromPoint.numCheckers[0]
-        : fromPoint.numCheckers[1];
-    const destCheckers =
-      this.currentPlayer === 0
-        ? toPoint.numCheckers[0]
-        : toPoint.numCheckers[1];
-    if (sourceCheckers > 0) {
-      if (this.currentPlayer === 0) {
-        fromPoint.numCheckers[0] = sourceCheckers - 1;
-        toPoint.numCheckers[0] = destCheckers + 1;
-      } else {
-        fromPoint.numCheckers[1] = sourceCheckers - 1;
-        toPoint.numCheckers[1] = destCheckers + 1;
-      }
-      newGame.currentPlayer = this.currentPlayer === 0 ? 1 : 0;
-      return newGame;
-    } else {
+    const fromPoint = this.points[from];
+    const toPoint = this.points[to];
+
+    const sourceCheckers = fromPoint.numCheckers[this.currentPlayer];
+    const destCheckers = toPoint.numCheckers[this.currentPlayer];
+
+    if (sourceCheckers === 0) {
       throw new Error(
         `There are no ${
           this.currentPlayer === 0 ? 'light' : 'dark'
         } checkers on point ${from}.`
       );
     }
+
+    const newGame = this.clone();
+
+    newGame.points[from].numCheckers[this.currentPlayer] = sourceCheckers - 1;
+    newGame.points[to].numCheckers[this.currentPlayer] = destCheckers + 1;
+
+    newGame.currentPlayer = 1 - newGame.currentPlayer;
+
+    return newGame;
   }
 
   /* private */ clone() {
