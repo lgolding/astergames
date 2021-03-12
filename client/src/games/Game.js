@@ -45,7 +45,7 @@ export default class Game {
 
   // TODO: Unit test this logic.
   tryMove(from, to) {
-    const newGame = { ...this };
+    const newGame = this.clone();
     const fromPoint = newGame.points[from];
     const toPoint = newGame.points[to];
     const sourceCheckers =
@@ -73,5 +73,11 @@ export default class Game {
         } checkers on point ${from}.`
       );
     }
+  }
+
+  /* private */ clone() {
+    const newGame = new Game();
+    newGame.points = this.points;
+    return newGame;
   }
 }
