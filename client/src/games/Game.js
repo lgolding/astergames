@@ -58,6 +58,11 @@ export default class Game {
       throw new Error('Cannot move to the point you started from.');
     }
 
+    const legalDirection = this.currentPlayer === 0 ? +1 : -1;
+    if (Math.sign(to - from) !== legalDirection) {
+      throw new Error('Cannot move backwards');
+    }
+
     const opponent = 1 - this.currentPlayer;
 
     const opponentDestCheckers = toPoint.numCheckers[opponent];
