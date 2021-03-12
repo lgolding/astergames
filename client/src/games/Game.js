@@ -59,12 +59,21 @@ export default class Game {
       );
     }
 
+    const opponent = 1 - this.currentPlayer;
+
+    const opponentDestCheckers = toPoint.numCheckers[opponent];
+    if (opponentDestCheckers > 1) {
+      throw new Error(
+        'Cannot move to a point occupied by two or more opponent checkers.'
+      );
+    }
+
     const newGame = this.clone();
 
     newGame.points[from].numCheckers[this.currentPlayer] = sourceCheckers - 1;
     newGame.points[to].numCheckers[this.currentPlayer] = destCheckers + 1;
 
-    newGame.currentPlayer = 1 - newGame.currentPlayer;
+    newGame.currentPlayer = opponent;
 
     return newGame;
   }

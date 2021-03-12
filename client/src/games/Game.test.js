@@ -19,7 +19,7 @@ describe('Game', () => {
       expect(() => game.tryMove(4, 5)).toThrow();
     });
 
-    xit('does not move to a point occupied by the opponent', () => {
+    it('does not move to a point occupied by the opponent', () => {
       const game = new Game();
       expect(() => game.tryMove(0, 4)).toThrow();
     });
