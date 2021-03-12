@@ -23,10 +23,25 @@ describe('Game', () => {
     });
 
     it('executes a legal move', () => {
-      const game = new Game();
-      const newGame = game.tryMove(0, 1);
-      expect(newGame.points[0].numCheckers[0]).toBe(4);
-      expect(newGame.points[1].numCheckers[0]).toBe(1);
+      let game = new Game();
+      game = game.tryMove(0, 1);
+      expect(game.points[0].numCheckers[0]).toBe(4);
+      expect(game.points[1].numCheckers[0]).toBe(1);
+    });
+
+    it('alternates players', () => {
+      let game = new Game();
+      expect(game.currentPlayer).toBe(0);
+
+      game = game.tryMove(0, 1);
+      expect(game.points[0].numCheckers[0]).toBe(4);
+      expect(game.points[1].numCheckers[0]).toBe(1);
+      expect(game.currentPlayer).toBe(1);
+
+      game = game.tryMove(12, 2);
+      expect(game.currentPlayer).toBe(0);
+      expect(game.points[12].numCheckers[1]).toBe(4);
+      expect(game.points[2].numCheckers[1]).toBe(1);
     });
   });
 });
