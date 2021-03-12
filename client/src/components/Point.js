@@ -26,8 +26,8 @@ const Point = ({ pointIndex, point }) => {
   }
 
   const checkerColor =
-    point.numLight > 0 ? CheckerColor.LIGHT : CheckerColor.DARK;
-  const numCheckers = point.numLight || point.numDark;
+    point.numCheckers[0] > 0 ? CheckerColor.LIGHT : CheckerColor.DARK;
+  const numCheckers = point.numCheckers[0] || point.numCheckers[1];
 
   const checkerIndices = Array.from(new Array(numCheckers).keys());
 
@@ -50,6 +50,7 @@ const Point = ({ pointIndex, point }) => {
       <div className={`checker-container ${pointRowClass}`}>
         {checkerIndices.map(checkerIndex => (
           <Checker
+            key={100 * pointIndex + checkerIndex}
             color={checkerColor}
             pointIndex={pointIndex}
             checkerIndex={checkerIndex}

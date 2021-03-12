@@ -49,16 +49,20 @@ export default class Game {
     const fromPoint = newGame.points[from];
     const toPoint = newGame.points[to];
     const sourceCheckers =
-      this.currentPlayer === 0 ? fromPoint.numLight : fromPoint.numDark;
+      this.currentPlayer === 0
+        ? fromPoint.numCheckers[0]
+        : fromPoint.numCheckers[1];
     const destCheckers =
-      this.currentPlayer === 0 ? toPoint.numLight : toPoint.numDark;
+      this.currentPlayer === 0
+        ? toPoint.numCheckers[0]
+        : toPoint.numCheckers[1];
     if (sourceCheckers > 0) {
       if (this.currentPlayer === 0) {
-        fromPoint.numLight = sourceCheckers - 1;
-        toPoint.numLight = destCheckers + 1;
+        fromPoint.numCheckers[0] = sourceCheckers - 1;
+        toPoint.numCheckers[0] = destCheckers + 1;
       } else {
-        fromPoint.numDark = sourceCheckers - 1;
-        toPoint.numDark = destCheckers + 1;
+        fromPoint.numCheckers[1] = sourceCheckers - 1;
+        toPoint.numCheckers[1] = destCheckers + 1;
       }
       newGame.currentPlayer = this.currentPlayer === 0 ? 1 : 0;
       return newGame;

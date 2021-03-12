@@ -1,9 +1,7 @@
 export default class Point {
-  numLight;
-  numDark;
+  numCheckers;
 
   constructor(numLight, numDark) {
-    this.numLight = numLight;
-    this.numDark = numDark;
+    this.numCheckers = [numLight, numDark];
   }
 }
