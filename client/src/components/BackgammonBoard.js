@@ -8,6 +8,13 @@ const BackgammonBoard = ({ game }) => {
 
   return (
     <div className='board'>
+      {indices.slice(0, 6).map(index => (
+        <div>{game.pointIndexToPointNumber(index)}</div>
+      ))}
+      <div style={{ backgroundColor: 'green' }}></div>
+      {indices.slice(6, 12).map(index => (
+        <div>{game.pointIndexToPointNumber(index)}</div>
+      ))}
       {indices.map(pointIndex => (
         <Point
           key={pointIndex}
@@ -15,7 +22,13 @@ const BackgammonBoard = ({ game }) => {
           point={game.points[pointIndex]}
         />
       ))}
-
+      {indices.slice(12, 18).map(index => (
+        <div>{game.pointIndexToPointNumber(index)}</div>
+      ))}
+      <div style={{ backgroundColor: 'green' }}></div>
+      {indices.slice(18, 24).map(index => (
+        <div>{game.pointIndexToPointNumber(index)}</div>
+      ))}
       <Bar />
     </div>
   );

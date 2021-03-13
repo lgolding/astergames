@@ -41,6 +41,20 @@ export default class Game {
     ];
   }
 
+  // Convert from a "point index" (the index of a point in the
+  // this.points array, which corresponds to grid layout order) to
+  // a "point number" the conventional number of the point from the
+  // point of view of the current player.
+  pointIndexToPointNumber(pointIndex) {
+    if (this.currentPlayer === PLAYER1) {
+      return pointIndex < 12 ? 13 + pointIndex : 24 - pointIndex;
+    } else {
+      return pointIndex < 12 ? 12 - pointIndex : 1 + pointIndex;
+    }
+  }
+
+  // Attempt to move a checker from the current player's "from" point
+  // to that player's "to" point. Throw an error if the move is illegal.
   tryMove(from, to) {
     const fromPoint = this.points[from];
     const toPoint = this.points[to];
