@@ -6,9 +6,9 @@ const MoveInput = ({ onMove }) => {
 
   const submitHandler = event => {
     event.preventDefault();
-    const from = fromField.current.value;
-    const to = toField.current.value;
-    onMove(from, to);
+    const fromPointNumber = parseInt(fromField.current.value);
+    const toPointNumber = parseInt(toField.current.value);
+    onMove(fromPointNumber, toPointNumber);
     fromField.current.focus();
     fromField.current.select();
   };

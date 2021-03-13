@@ -26,9 +26,9 @@ describe('Game', () => {
     });
 
     it('executes a legal move', () => {
-      game = game.tryMove(13, 11);
+      game = game.tryMove(13, 9);
       expect(game.points[0].numCheckers).toBe(4);
-      expect(game.points[13].numCheckers).toBe(1);
+      expect(game.points[15].numCheckers).toBe(1);
     });
 
     it('alternates players', () => {
