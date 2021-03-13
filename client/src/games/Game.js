@@ -1,11 +1,9 @@
+import { PLAYER1, PLAYER2 } from './constants';
 import Point from './Point';
 
 export default class Game {
-  points;
-  currentPlayer;
-
   constructor() {
-    this.currentPlayer = 0;
+    this.currentPlayer = PLAYER1;
 
     // The point indices run in grid layout order, from 0 at the top left to 23
     // at the bottom right. From the point of view of the player at the bottom
@@ -13,33 +11,33 @@ export default class Game {
     // right. From the point of view of the player at the top ("dark"), the
     // points run from 24 at the bottom right to 1 at the top right.
     this.points = [
-      new Point(5, 0),
-      new Point(0, 0),
-      new Point(0, 0),
-      new Point(0, 0),
-      new Point(0, 3),
-      new Point(0, 0),
+      new Point(PLAYER1, 5),
+      new Point(),
+      new Point(),
+      new Point(),
+      new Point(PLAYER2, 3),
+      new Point(),
 
-      new Point(0, 5),
-      new Point(0, 0),
-      new Point(0, 0),
-      new Point(0, 0),
-      new Point(0, 0),
-      new Point(2, 0),
+      new Point(PLAYER2, 5),
+      new Point(),
+      new Point(),
+      new Point(),
+      new Point(),
+      new Point(PLAYER1, 2),
 
-      new Point(0, 5),
-      new Point(0, 0),
-      new Point(0, 0),
-      new Point(0, 0),
-      new Point(3, 0),
-      new Point(0, 0),
+      new Point(PLAYER2, 5),
+      new Point(),
+      new Point(),
+      new Point(),
+      new Point(PLAYER1, 3),
+      new Point(),
 
-      new Point(5, 0),
-      new Point(0, 0),
-      new Point(0, 0),
-      new Point(0, 0),
-      new Point(0, 0),
-      new Point(0, 2),
+      new Point(PLAYER1, 5),
+      new Point(),
+      new Point(),
+      new Point(),
+      new Point(),
+      new Point(PLAYER2, 2),
     ];
   }
 
@@ -47,10 +45,7 @@ export default class Game {
     const fromPoint = this.points[from];
     const toPoint = this.points[to];
 
-    const sourceCheckers = fromPoint.numCheckers[this.currentPlayer];
-    const destCheckers = toPoint.numCheckers[this.currentPlayer];
-
-    if (sourceCheckers === 0) {
+    if (fromPoint.playerIndex !== this.currentPlayer) {
       throw new Error('Cannot move from a point you do not occupy.');
     }
 
@@ -58,15 +53,14 @@ export default class Game {
       throw new Error('Cannot move to the point you started from.');
     }
 
-    const legalDirection = this.currentPlayer === 0 ? +1 : -1;
+    const legalDirection = this.currentPlayer === PLAYER1 ? +1 : -1;
     if (Math.sign(to - from) !== legalDirection) {
       throw new Error('Cannot move backwards');
     }
 
-    const opponent = 1 - this.currentPlayer;
+    const opponent = this.currentPlayer === PLAYER1 ? PLAYER2 : PLAYER1;
 
-    const opponentDestCheckers = toPoint.numCheckers[opponent];
-    if (opponentDestCheckers > 1) {
+    if (toPoint.playerIndex === opponent && toPoint.numCheckers > 1) {
       throw new Error(
         'Cannot move to a point non-blot point occupied by the opponent.'
       );
@@ -74,8 +68,9 @@ export default class Game {
 
     const newGame = this.clone();
 
-    newGame.points[from].numCheckers[this.currentPlayer] = sourceCheckers - 1;
-    newGame.points[to].numCheckers[this.currentPlayer] = destCheckers + 1;
+    --newGame.points[from].numCheckers;
+    ++newGame.points[to].numCheckers;
+    newGame.points[to].playerIndex = this.currentPlayer;
 
     newGame.currentPlayer = opponent;
 

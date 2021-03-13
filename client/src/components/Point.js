@@ -1,6 +1,6 @@
 import Checker from './Checker';
 import CheckerColor from '../games/CheckerColor';
-import { POINTS_ON_ROW } from '../games/constants';
+import { PLAYER1, POINTS_ON_ROW } from '../games/constants';
 
 const LIGHT_POINT_CLASS_NAME = 'point-light';
 const DARK_POINT_CLASS_NAME = 'point-dark';
@@ -26,8 +26,8 @@ const Point = ({ pointIndex, point }) => {
   }
 
   const checkerColor =
-    point.numCheckers[0] > 0 ? CheckerColor.LIGHT : CheckerColor.DARK;
-  const numCheckers = point.numCheckers[0] || point.numCheckers[1];
+    point.playerIndex === PLAYER1 ? CheckerColor.LIGHT : CheckerColor.DARK;
+  const numCheckers = point.numCheckers;
 
   const checkerIndices = Array.from(new Array(numCheckers).keys());
 

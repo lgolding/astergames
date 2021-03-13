@@ -1,7 +1,8 @@
-export default class Point {
-  numCheckers;
+import { NO_PLAYER } from './constants';
 
-  constructor(numLight, numDark) {
-    this.numCheckers = [numLight, numDark];
+export default class Point {
+  constructor(playerIndex = NO_PLAYER, numCheckers = 0) {
+    this.playerIndex = playerIndex;
+    this.numCheckers = numCheckers;
   }
 }
