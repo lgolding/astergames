@@ -8,11 +8,11 @@ const BackgammonBoard = ({ game }) => {
 
   return (
     <div className='board'>
-      {indices.slice(0, 6).map(index => (
+      {indices.slice(0, POINTS_ON_BOARD / 4).map(index => (
         <div>{game.pointIndexToPointNumber(index)}</div>
       ))}
       <div style={{ backgroundColor: 'green' }}></div>
-      {indices.slice(6, 12).map(index => (
+      {indices.slice(POINTS_ON_BOARD / 4, POINTS_ON_BOARD / 2).map(index => (
         <div>{game.pointIndexToPointNumber(index)}</div>
       ))}
       {indices.map(pointIndex => (
@@ -22,11 +22,13 @@ const BackgammonBoard = ({ game }) => {
           point={game.points[pointIndex]}
         />
       ))}
-      {indices.slice(12, 18).map(index => (
-        <div>{game.pointIndexToPointNumber(index)}</div>
-      ))}
+      {indices
+        .slice(POINTS_ON_BOARD / 2, (3 * POINTS_ON_BOARD) / 4)
+        .map(index => (
+          <div>{game.pointIndexToPointNumber(index)}</div>
+        ))}
       <div style={{ backgroundColor: 'green' }}></div>
-      {indices.slice(18, 24).map(index => (
+      {indices.slice((3 * POINTS_ON_BOARD) / 4, POINTS_ON_BOARD).map(index => (
         <div>{game.pointIndexToPointNumber(index)}</div>
       ))}
       <Bar />
