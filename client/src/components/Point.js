@@ -5,6 +5,9 @@ import { PLAYER1, POINTS_ON_ROW } from '../games/constants';
 const LIGHT_POINT_CLASS_NAME = 'point-light';
 const DARK_POINT_CLASS_NAME = 'point-dark';
 
+const TOP_POINT_ROW = 2; // Because row 1 is used to display the point numbers.
+const BOTTOM_POINT_ROW = 3;
+
 const Point = ({ pointIndex, point }) => {
   let pointColorClass;
   if (pointIndex < POINTS_ON_ROW) {
@@ -18,10 +21,10 @@ const Point = ({ pointIndex, point }) => {
   let pointRow;
   let pointRowClass;
   if (pointIndex < POINTS_ON_ROW) {
-    pointRow = 1;
+    pointRow = TOP_POINT_ROW;
     pointRowClass = 'point-top-row';
   } else {
-    pointRow = 2;
+    pointRow = BOTTOM_POINT_ROW;
     pointRowClass = 'point-bottom-row';
   }
 
@@ -40,7 +43,7 @@ const Point = ({ pointIndex, point }) => {
           viewBox='0 0 100 100'
           preserveAspectRatio='none'
         >
-          {pointRow === 1 ? (
+          {pointRow === TOP_POINT_ROW ? (
             <polygon points='0,0 50,85 100,0' />
           ) : (
             <polygon points='0,100 50,15 100,100' />
