@@ -43,8 +43,8 @@ export default class Game {
 
   // Convert from a "point index" (the index of a point in the
   // this.points array, which corresponds to grid layout order) to
-  // a "point number" the conventional number of the point from the
-  // point of view of the current player.
+  // a "point number" (the conventional number of the point from the
+  // point of view of the current player).
   pointIndexToPointNumber(pointIndex) {
     if (this.currentPlayer === PLAYER1) {
       return pointIndex < 12 ? 13 + pointIndex : 24 - pointIndex;
@@ -53,23 +53,37 @@ export default class Game {
     }
   }
 
+  // Convert from a "point number" (the conventional number of the point
+  // from the point of view of the current player) to a "point index"
+  // (the index of a point in the this.points array, which corresponds to
+  // grid layout order.
+  pointNumberToPointIndex(pointNumber) {
+    if (this.currentPlayer === PLAYER1) {
+      return pointNumber > 12 ? pointNumber - 13 : 24 - pointNumber;
+    } else {
+      return pointNumber > 12 ? pointNumber - 1 : 12 - pointNumber;
+    }
+  }
+
   // Attempt to move a checker from the current player's "from" point
   // to that player's "to" point. Throw an error if the move is illegal.
-  tryMove(from, to) {
-    const fromPoint = this.points[from];
-    const toPoint = this.points[to];
+  tryMove(fromPointNumber, toPointNumber) {
+    const fromPointIndex = this.pointNumberToPointIndex(fromPointNumber);
+    const fromPoint = this.points[fromPointIndex];
 
-    if (fromPoint.playerIndex !== this.currentPlayer) {
-      throw new Error('Cannot move from a point you do not occupy.');
+    const toPointIndex = this.pointNumberToPointIndex(toPointNumber);
+    const toPoint = this.points[toPointIndex];
+
+    if (toPointNumber > fromPointNumber) {
+      throw new Error('Cannot move backwards');
     }
 
-    if (from === to) {
+    if (toPointNumber === fromPointNumber) {
       throw new Error('Cannot move to the point you started from.');
     }
 
-    const legalDirection = this.currentPlayer === PLAYER1 ? +1 : -1;
-    if (Math.sign(to - from) !== legalDirection) {
-      throw new Error('Cannot move backwards');
+    if (fromPoint.playerIndex !== this.currentPlayer) {
+      throw new Error('Cannot move from a point you do not occupy.');
     }
 
     const opponent = this.currentPlayer === PLAYER1 ? PLAYER2 : PLAYER1;
@@ -84,9 +98,9 @@ export default class Game {
 
     const newGame = this.clone();
 
-    --newGame.points[from].numCheckers;
-    ++newGame.points[to].numCheckers;
-    newGame.points[to].playerIndex = this.currentPlayer;
+    --newGame.points[fromPointIndex].numCheckers;
+    ++newGame.points[toPointIndex].numCheckers;
+    newGame.points[toPointIndex].playerIndex = this.currentPlayer;
 
     newGame.currentPlayer = opponent;
 
