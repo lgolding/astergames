@@ -8,7 +8,7 @@ const BackgammonBoard = ({ game }) => {
 
   return (
     <div className='board'>
-      {indices.slice(0, POINTS_ON_BOARD).map(pointIndex => (
+      {indices.map(pointIndex => (
         <Point
           key={pointIndex}
           pointIndex={pointIndex}
