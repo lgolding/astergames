@@ -66,6 +66,8 @@ export default class Game {
       );
     }
 
+    // TODO: Hit a blot.
+
     const newGame = this.clone();
 
     --newGame.points[from].numCheckers;
