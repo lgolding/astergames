@@ -1,7 +1,8 @@
 import CheckerColor from '../games/CheckerColor';
-
-const LIGHT_CHECKER_CLASS_NAME = 'checker-light';
-const DARK_CHECKER_CLASS_NAME = 'checker-dark';
+import {
+  DARK_CHECKER_CLASS_NAME,
+  LIGHT_CHECKER_CLASS_NAME,
+} from './classNames';
 
 const Checker = ({ color }) => {
   const checkerColorClass =
