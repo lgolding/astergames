@@ -1,7 +1,7 @@
 import './backgammon.css';
 import Point from './Point';
 import Bar from './Bar';
-import { POINTS_ON_BOARD } from '../games/constants';
+import { PLAYER1, PLAYER2, POINTS_ON_BOARD } from '../games/constants';
 
 const BackgammonBoard = ({ game }) => {
   let indices = Array.from(Array(POINTS_ON_BOARD).keys());
@@ -31,7 +31,7 @@ const BackgammonBoard = ({ game }) => {
       {indices.slice((3 * POINTS_ON_BOARD) / 4, POINTS_ON_BOARD).map(index => (
         <div>{game.pointIndexToPointNumber(index)}</div>
       ))}
-      <Bar />
+      <Bar player1={game.bar[PLAYER1]} player2={game.bar[PLAYER2]} />
     </div>
   );
 };

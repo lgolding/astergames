@@ -59,5 +59,14 @@ describe('Game', () => {
       expect(game.currentPlayer).toBe(PLAYER2);
       expect(() => game.tryMove(17, 11)).toThrow();
     });
+
+    it('hits a blot', () => {
+      game = game.tryMove(24, 23);
+      game = game.tryMove(6, 2);
+      expect(game.points[10].numCheckers).toBe(1);
+      expect(game.points[10].playerIndex).toBe(PLAYER2);
+      expect(game.bar[PLAYER1]).toBe(1);
+      expect(game.bar[PLAYER2]).toBe(0);
+    });
   });
 });

@@ -39,6 +39,8 @@ export default class Game {
       new Point(),
       new Point(PLAYER2, 2),
     ];
+
+    this.bar = [0, 0];
   }
 
   // Convert from a "point index" (the index of a point in the
@@ -94,14 +96,23 @@ export default class Game {
       );
     }
 
-    // TODO: Hit a blot.
+    // TODO: Ensure move <= 6 points.
+
+    // TODO: Enter from bar.
 
     const newGame = this.clone();
 
     --newGame.points[fromPointIndex].numCheckers;
-    ++newGame.points[toPointIndex].numCheckers;
-    newGame.points[toPointIndex].playerIndex = this.currentPlayer;
 
+    if (toPoint.playerIndex !== opponent) {
+      // A normal move.
+      ++newGame.points[toPointIndex].numCheckers;
+    } else {
+      // Hit the blot.
+      ++newGame.bar[opponent];
+    }
+
+    newGame.points[toPointIndex].playerIndex = this.currentPlayer;
     newGame.currentPlayer = opponent;
 
     return newGame;
@@ -110,6 +121,7 @@ export default class Game {
   /* private */ clone() {
     const newGame = new Game();
     newGame.points = this.points;
+    newGame.bar = this.bar;
     return newGame;
   }
 }
