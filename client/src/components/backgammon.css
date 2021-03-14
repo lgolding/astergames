@@ -59,6 +59,11 @@
   fill: var(--light-point-color);
 }
 
+.point-number {
+  display: grid;
+  align-content: center;
+}
+
 .bar {
   background-color: var(--bar-color);
   grid-column: 7;
