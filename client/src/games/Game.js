@@ -1,4 +1,4 @@
-import { PLAYER1, PLAYER2 } from './constants';
+import { PLAYER1, PLAYER2, MAX_DIE_FACE } from './constants';
 import Point from './Point';
 
 export default class Game {
@@ -86,6 +86,10 @@ export default class Game {
 
     if (fromPoint.playerIndex !== this.currentPlayer) {
       throw new Error('Cannot move from a point you do not occupy.');
+    }
+
+    if (fromPointNumber - toPointNumber > MAX_DIE_FACE) {
+      throw new Error(`Cannot make a move longer than ${MAX_DIE_FACE}.`);
     }
 
     const opponent = this.currentPlayer === PLAYER1 ? PLAYER2 : PLAYER1;

@@ -60,6 +60,10 @@ describe('Game', () => {
       expect(() => game.tryMove(17, 11)).toThrow();
     });
 
+    it('cannot move farther than the maximum die face', () => {
+      expect(() => game.tryMove(13, 6)).toThrow();
+    });
+
     it('hits a blot', () => {
       game = game.tryMove(24, 23);
       game = game.tryMove(6, 2);
