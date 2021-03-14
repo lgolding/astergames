@@ -83,3 +83,23 @@
 .checker-dark {
   background-color: var(--dark-checker-color);
 }
+
+.move-input-form {
+  margin: 1em auto;
+  display: grid;
+  grid-template-rows: 1fr 1fr auto;
+  grid-template-columns: 1fr 3fr;
+  grid-gap: 0.5em;
+}
+
+.move-input-form__label {
+  display: block;
+  text-align: left;
+}
+
+.move-input-form__button {
+  grid-column: 1 / span 2;
+  margin: 0 auto;
+  padding: 0.5em;
+  border-radius: 25%;
+}
