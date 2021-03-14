@@ -92,7 +92,7 @@ export default class Game {
 
     if (toPoint.playerIndex === opponent && toPoint.numCheckers > 1) {
       throw new Error(
-        'Cannot move to a point non-blot point occupied by the opponent.'
+        'Cannot move to a non-blot point occupied by the opponent.'
       );
     }
 
