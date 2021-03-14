@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import Checker from './Checker';
 import CheckerColor from '../games/CheckerColor';
 import { PLAYER1, POINTS_ON_ROW } from '../games/constants';
@@ -32,7 +33,7 @@ const Point = ({ pointIndex, point }) => {
     point.playerIndex === PLAYER1 ? CheckerColor.LIGHT : CheckerColor.DARK;
   const numCheckers = point.numCheckers;
 
-  const checkerIndices = Array.from(new Array(numCheckers).keys());
+  const checkerIndices = _.range(numCheckers);
 
   return (
     <div className='point' style={{ gridRow: pointRow }}>

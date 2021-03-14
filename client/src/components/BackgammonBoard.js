@@ -1,10 +1,11 @@
+import _ from 'lodash';
 import './backgammon.css';
 import Point from './Point';
 import Bar from './Bar';
 import { PLAYER1, PLAYER2, POINTS_ON_BOARD } from '../games/constants';
 
 const BackgammonBoard = ({ game }) => {
-  let indices = Array.from(Array(POINTS_ON_BOARD).keys());
+  let indices = _.range(POINTS_ON_BOARD);
 
   return (
     <div className='board'>
