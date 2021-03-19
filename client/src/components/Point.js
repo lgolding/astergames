@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import Checker from './Checker';
 import CheckerColor from '../games/CheckerColor';
+import { START_POINT_INDEX_DATA_TRANSFER_PROPERTY } from './constants';
 import { PLAYER1, POINTS_ON_ROW } from '../games/constants';
 
 const LIGHT_POINT_CLASS_NAME = 'point-light';
@@ -35,8 +36,24 @@ const Point = ({ pointIndex, point }) => {
 
   const checkerIndices = _.range(numCheckers);
 
+  const handleDragOver = event => {
+    event.preventDefault();
+  };
+
+  const handleDrop = event => {
+    const startPointIndex = event.dataTransfer.getData(
+      START_POINT_INDEX_DATA_TRANSFER_PROPERTY
+    );
+    console.log(`Drop on point ${pointIndex} from point ${startPointIndex}`);
+  };
+
   return (
-    <div className='point' style={{ gridRow: pointRow }}>
+    <div
+      className='point'
+      style={{ gridRow: pointRow }}
+      onDragOver={handleDragOver}
+      onDrop={handleDrop}
+    >
       <div className={`point-background ${pointColorClass}`}>
         <svg
           width='100%'
@@ -57,7 +74,6 @@ const Point = ({ pointIndex, point }) => {
             key={100 * pointIndex + checkerIndex}
             color={checkerColor}
             pointIndex={pointIndex}
-            checkerIndex={checkerIndex}
           />
         ))}
       </div>
