@@ -18,7 +18,7 @@ const BackgammonDisplay = () => {
   return (
     <>
       <div>Current player: {game.currentPlayer}</div>
-      <BackgammonBoard game={game} />
+      <BackgammonBoard game={game} onMove={handleMove} />
       <MoveInput onMove={handleMove} />
     </>
   );

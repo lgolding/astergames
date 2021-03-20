@@ -5,7 +5,7 @@ import Bar from './Bar';
 import { POINT_NUMBER_CLASS_NAME } from './classNames';
 import { PLAYER1, PLAYER2, POINTS_ON_BOARD } from '../games/constants';
 
-const BackgammonBoard = ({ game }) => {
+const BackgammonBoard = ({ game, onMove }) => {
   let indices = _.range(POINTS_ON_BOARD);
 
   return (
@@ -22,7 +22,12 @@ const BackgammonBoard = ({ game }) => {
         </div>
       ))}
       {indices.map(pointIndex => (
-        <Point key={pointIndex} game={game} pointIndex={pointIndex} />
+        <Point
+          key={pointIndex}
+          game={game}
+          pointIndex={pointIndex}
+          onMove={onMove}
+        />
       ))}
       {indices
         .slice(POINTS_ON_BOARD / 2, (3 * POINTS_ON_BOARD) / 4)

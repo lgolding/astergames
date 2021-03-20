@@ -10,7 +10,7 @@ const DARK_POINT_CLASS_NAME = 'point-dark';
 const TOP_POINT_ROW = 2; // Because row 1 is used to display the point numbers.
 const BOTTOM_POINT_ROW = 3;
 
-const Point = ({ pointIndex, game }) => {
+const Point = ({ pointIndex, game, onMove }) => {
   const point = game.points[pointIndex];
   const currentPlayer = game.currentPlayer;
 
@@ -53,6 +53,8 @@ const Point = ({ pointIndex, game }) => {
     console.log(
       `Player ${currentPlayer} dragged from point ${fromPointNumber} (index ${startPointIndex}) to point ${toPointNumber} (index ${pointIndex}).`
     );
+
+    onMove(fromPointNumber, toPointNumber);
   };
 
   return (
