@@ -93,11 +93,17 @@
   margin: 1em auto;
   display: flex;
   gap: 20px;
+  align-items: center;
 }
 
 .die {
   height: 50px;
   width: 50px;
   border: 1px solid black;
+  border-radius: 10%;
+}
+
+button {
+  padding: 0.2em 1em;
   border-radius: 10%;
 }
