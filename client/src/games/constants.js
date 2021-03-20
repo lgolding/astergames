@@ -5,4 +5,5 @@ export const NO_PLAYER = -1;
 export const PLAYER1 = 0;
 export const PLAYER2 = 1;
 
-export const MAX_DIE_FACE = 6;
+export const NUM_DICE = 2;
+export const NUM_DIE_FACES = 6;

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import BackgammonBoard from './BackgammonBoard';
+import DicePanel from './DicePanel';
 import Game from '../games/Game';
 
 const BackgammonDisplay = () => {
@@ -18,6 +19,7 @@ const BackgammonDisplay = () => {
     <>
       <div>Current player: {game.currentPlayer}</div>
       <BackgammonBoard game={game} onMove={handleMove} />
+      <DicePanel />
     </>
   );
 };
