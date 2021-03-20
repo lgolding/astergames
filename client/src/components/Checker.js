@@ -3,7 +3,7 @@ import {
   DARK_CHECKER_CLASS_NAME,
   LIGHT_CHECKER_CLASS_NAME,
 } from './classNames';
-import { START_POINT_INDEX_DATA_TRANSFER_PROPERTY } from './constants.js';
+import { DRAG_DROP_DATA_FORMAT } from './constants.js';
 
 const handleDragStart = (
   event,
@@ -15,10 +15,7 @@ const handleDragStart = (
     `Player ${currentPlayer} started dragging from point ${pointIndex}, which is occupied by player ${pointPlayerIndex}.`
   );
   if (currentPlayer === pointPlayerIndex) {
-    event.dataTransfer.setData(
-      START_POINT_INDEX_DATA_TRANSFER_PROPERTY,
-      pointIndex
-    );
+    event.dataTransfer.setData(DRAG_DROP_DATA_FORMAT, pointIndex);
   } else {
     // Cannot drag from this point because it is not occupied by the current player.
     event.preventDefault();

@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import Checker from './Checker';
 import CheckerColor from '../games/CheckerColor';
-import { START_POINT_INDEX_DATA_TRANSFER_PROPERTY } from './constants';
+import { DRAG_DROP_DATA_FORMAT } from './constants';
 import { PLAYER1, POINTS_ON_ROW } from '../games/constants';
 
 const LIGHT_POINT_CLASS_NAME = 'point-light';
@@ -44,8 +44,10 @@ const Point = ({ pointIndex, game, onMove }) => {
   };
 
   const handleDrop = event => {
+    event.preventDefault();
+    event.stopPropagation();
     const startPointIndex = parseInt(
-      event.dataTransfer.getData(START_POINT_INDEX_DATA_TRANSFER_PROPERTY)
+      event.dataTransfer.getData(DRAG_DROP_DATA_FORMAT)
     );
     const fromPointNumber = game.pointIndexToPointNumber(startPointIndex);
     const toPointNumber = game.pointIndexToPointNumber(pointIndex);
