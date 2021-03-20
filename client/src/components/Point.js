@@ -10,7 +10,10 @@ const DARK_POINT_CLASS_NAME = 'point-dark';
 const TOP_POINT_ROW = 2; // Because row 1 is used to display the point numbers.
 const BOTTOM_POINT_ROW = 3;
 
-const Point = ({ pointIndex, point, currentPlayer }) => {
+const Point = ({ pointIndex, game }) => {
+  const point = game.points[pointIndex];
+  const currentPlayer = game.currentPlayer;
+
   let pointColorClass;
   if (pointIndex < POINTS_ON_ROW) {
     pointColorClass =
@@ -41,11 +44,14 @@ const Point = ({ pointIndex, point, currentPlayer }) => {
   };
 
   const handleDrop = event => {
-    const startPointIndex = event.dataTransfer.getData(
-      START_POINT_INDEX_DATA_TRANSFER_PROPERTY
+    const startPointIndex = parseInt(
+      event.dataTransfer.getData(START_POINT_INDEX_DATA_TRANSFER_PROPERTY)
     );
+    const fromPointNumber = game.pointIndexToPointNumber(startPointIndex);
+    const toPointNumber = game.pointIndexToPointNumber(pointIndex);
+
     console.log(
-      `Player ${currentPlayer} dragged from point ${startPointIndex} to point ${pointIndex}.`
+      `Player ${currentPlayer} dragged from point ${fromPointNumber} (index ${startPointIndex}) to point ${toPointNumber} (index ${pointIndex}).`
     );
   };
 

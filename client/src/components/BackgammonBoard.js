@@ -22,12 +22,7 @@ const BackgammonBoard = ({ game }) => {
         </div>
       ))}
       {indices.map(pointIndex => (
-        <Point
-          key={pointIndex}
-          pointIndex={pointIndex}
-          point={game.points[pointIndex]}
-          currentPlayer={game.currentPlayer}
-        />
+        <Point key={pointIndex} game={game} pointIndex={pointIndex} />
       ))}
       {indices
         .slice(POINTS_ON_BOARD / 2, (3 * POINTS_ON_BOARD) / 4)

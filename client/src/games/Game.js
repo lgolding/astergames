@@ -100,8 +100,6 @@ export default class Game {
       );
     }
 
-    // TODO: Ensure move <= 6 points.
-
     // TODO: Enter from bar.
 
     const newGame = this.clone();
