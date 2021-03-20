@@ -5,14 +5,27 @@ import {
 } from './classNames';
 import { START_POINT_INDEX_DATA_TRANSFER_PROPERTY } from './constants.js';
 
-const handleDragStart = (event, pointIndex) => {
-  event.dataTransfer.setData(
-    START_POINT_INDEX_DATA_TRANSFER_PROPERTY,
-    pointIndex
+const handleDragStart = (
+  event,
+  pointIndex,
+  pointPlayerIndex,
+  currentPlayer
+) => {
+  console.log(
+    `Player ${currentPlayer} started dragging from point ${pointIndex}, which is occupied by player ${pointPlayerIndex}.`
   );
+  if (currentPlayer === pointPlayerIndex) {
+    event.dataTransfer.setData(
+      START_POINT_INDEX_DATA_TRANSFER_PROPERTY,
+      pointIndex
+    );
+  } else {
+    // Cannot drag from this point because it is not occupied by the current player.
+    event.preventDefault();
+  }
 };
 
-const Checker = ({ color, pointIndex }) => {
+const Checker = ({ color, pointIndex, pointPlayerIndex, currentPlayer }) => {
   const checkerColorClass =
     color === CheckerColor.LIGHT
       ? LIGHT_CHECKER_CLASS_NAME
@@ -21,7 +34,9 @@ const Checker = ({ color, pointIndex }) => {
     <div
       className={`checker ${checkerColorClass}`}
       draggable
-      onDragStart={event => handleDragStart(event, pointIndex)}
+      onDragStart={event =>
+        handleDragStart(event, pointIndex, pointPlayerIndex, currentPlayer)
+      }
     ></div>
   );
 };

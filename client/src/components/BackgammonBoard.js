@@ -26,6 +26,7 @@ const BackgammonBoard = ({ game }) => {
           key={pointIndex}
           pointIndex={pointIndex}
           point={game.points[pointIndex]}
+          currentPlayer={game.currentPlayer}
         />
       ))}
       {indices
