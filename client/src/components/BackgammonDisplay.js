@@ -15,11 +15,16 @@ const BackgammonDisplay = () => {
     }
   };
 
+  const handleRoll = roll => {
+    const newGame = game.startTurn(roll);
+    setGame(newGame);
+  };
+
   return (
     <>
       <div>Current player: {game.currentPlayer}</div>
       <BackgammonBoard game={game} onMove={handleMove} />
-      <DicePanel />
+      <DicePanel onRoll={handleRoll} />
     </>
   );
 };

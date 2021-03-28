@@ -4,6 +4,7 @@ import Point from './Point';
 export default class Game {
   constructor() {
     this.currentPlayer = PLAYER1;
+    this.remainingMoves = [];
 
     // The point indices run in grid layout order, from 0 at the top left to 23
     // at the bottom right. From the point of view of the player at the bottom
@@ -67,6 +68,13 @@ export default class Game {
     }
   }
 
+  startTurn(roll) {
+    // This constant cloning is ridiculous.
+    const newGame = this.clone();
+    newGame.remainingMoves = roll; // TODO: Handle doubles.
+    return newGame;
+  }
+
   // Attempt to move a checker from the current player's "from" point
   // to that player's "to" point. Throw an error if the move is illegal.
   tryMove(fromPointNumber, toPointNumber) {
@@ -124,6 +132,7 @@ export default class Game {
     const newGame = new Game();
     newGame.points = this.points;
     newGame.bar = this.bar;
+    newGame.remainingMoves = this.remainingMoves;
     return newGame;
   }
 }
