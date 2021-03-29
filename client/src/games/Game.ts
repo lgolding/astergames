@@ -3,6 +3,11 @@ import { PLAYER1, PLAYER2, NUM_DIE_FACES } from './constants';
 import Point from './Point';
 
 export default class Game {
+  currentPlayer: number;
+  remainingMoves: number[];
+  points: Point[];
+  bar: number[];
+
   constructor() {
     this.currentPlayer = PLAYER1;
     this.remainingMoves = [];
@@ -49,7 +54,7 @@ export default class Game {
   // this.points array, which corresponds to grid layout order) to
   // a "point number" (the conventional number of the point from the
   // point of view of the current player).
-  pointIndexToPointNumber(pointIndex) {
+  pointIndexToPointNumber(pointIndex: number): number {
     if (this.currentPlayer === PLAYER1) {
       return pointIndex < 12 ? 13 + pointIndex : 24 - pointIndex;
     } else {
@@ -61,7 +66,7 @@ export default class Game {
   // from the point of view of the current player) to a "point index"
   // (the index of a point in the this.points array, which corresponds to
   // grid layout order.
-  pointNumberToPointIndex(pointNumber) {
+  pointNumberToPointIndex(pointNumber: number): number {
     if (this.currentPlayer === PLAYER1) {
       return pointNumber > 12 ? pointNumber - 13 : 24 - pointNumber;
     } else {
@@ -69,13 +74,13 @@ export default class Game {
     }
   }
 
-  static getMovesFromRoll(roll) {
+  static getMovesFromRoll(roll: number[]): number[] {
     return roll[0] !== roll[1]
       ? roll // A normal roll.
       : [...roll, ...roll]; // Doubles.
   }
 
-  startTurn(roll) {
+  startTurn(roll: number[]): Game {
     // TODO: This constant cloning is ridiculous. It's inefficient and it leads to bugs
     // where I forget to assign the new game back to the local variable.
     const newGame = this.clone();
@@ -85,7 +90,7 @@ export default class Game {
 
   // Attempt to move a checker from the current player's "from" point
   // to that player's "to" point. Throw an error if the move is illegal.
-  move(fromPointNumber, toPointNumber) {
+  move(fromPointNumber: number, toPointNumber: number) {
     const fromPointIndex = this.pointNumberToPointIndex(fromPointNumber);
     const fromPoint = this.points[fromPointIndex];
 
