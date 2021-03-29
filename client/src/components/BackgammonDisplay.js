@@ -8,7 +8,7 @@ const BackgammonDisplay = () => {
 
   const handleMove = (from, to) => {
     try {
-      const newGame = game.tryMove(from, to);
+      const newGame = game.move(from, to);
       setGame(newGame);
     } catch (err) {
       alert(err.message);
@@ -22,7 +22,7 @@ const BackgammonDisplay = () => {
 
   return (
     <>
-      <div>Current player: {game.currentPlayer}</div>
+      <div>Current player: {game.currentPlayer + 1}</div>
       <BackgammonBoard game={game} onMove={handleMove} />
       <DicePanel onRoll={handleRoll} />
     </>
@@ -30,3 +30,6 @@ const BackgammonDisplay = () => {
 };
 
 export default BackgammonDisplay;
+
+// TODO: Test roll of doubles
+// TODO: Keep state: don't allow drag if dice have not yet been rolled.
