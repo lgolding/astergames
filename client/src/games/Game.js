@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { PLAYER1, PLAYER2, NUM_DIE_FACES } from './constants';
 import Point from './Point';
 
@@ -68,16 +69,23 @@ export default class Game {
     }
   }
 
+  static getMovesFromRoll(roll) {
+    return roll[0] !== roll[1]
+      ? roll // A normal roll.
+      : [...roll, ...roll]; // Doubles.
+  }
+
   startTurn(roll) {
-    // This constant cloning is ridiculous.
+    // TODO: This constant cloning is ridiculous. It's inefficient and it leads to bugs
+    // where I forget to assign the new game back to the local variable.
     const newGame = this.clone();
-    newGame.remainingMoves = roll; // TODO: Handle doubles.
+    newGame.remainingMoves = Game.getMovesFromRoll(roll);
     return newGame;
   }
 
   // Attempt to move a checker from the current player's "from" point
   // to that player's "to" point. Throw an error if the move is illegal.
-  tryMove(fromPointNumber, toPointNumber) {
+  move(fromPointNumber, toPointNumber) {
     const fromPointIndex = this.pointNumberToPointIndex(fromPointNumber);
     const fromPoint = this.points[fromPointIndex];
 
@@ -96,8 +104,15 @@ export default class Game {
       throw new Error('Cannot move from a point you do not occupy.');
     }
 
-    if (fromPointNumber - toPointNumber > NUM_DIE_FACES) {
+    const moveLength = fromPointNumber - toPointNumber;
+
+    if (moveLength > NUM_DIE_FACES) {
       throw new Error(`Cannot make a move longer than ${NUM_DIE_FACES}.`);
+    }
+
+    const index = _.indexOf(this.remainingMoves, moveLength);
+    if (index === -1) {
+      throw new Error(`You did not roll a ${moveLength}`);
     }
 
     const opponent = this.currentPlayer === PLAYER1 ? PLAYER2 : PLAYER1;
@@ -123,13 +138,21 @@ export default class Game {
     }
 
     newGame.points[toPointIndex].playerIndex = this.currentPlayer;
-    newGame.currentPlayer = opponent;
+
+    newGame.remainingMoves = this.remainingMoves
+      .slice(0, index)
+      .concat(this.remainingMoves.slice(index + 1, this.remainingMoves.length));
+
+    if (newGame.remainingMoves.length === 0) {
+      newGame.currentPlayer = opponent;
+    }
 
     return newGame;
   }
 
   /* private */ clone() {
     const newGame = new Game();
+    newGame.currentPlayer = this.currentPlayer;
     newGame.points = this.points;
     newGame.bar = this.bar;
     newGame.remainingMoves = this.remainingMoves;
