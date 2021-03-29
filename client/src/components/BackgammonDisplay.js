@@ -31,5 +31,4 @@ const BackgammonDisplay = () => {
 
 export default BackgammonDisplay;
 
-// TODO: Test roll of doubles
 // TODO: Keep state: don't allow drag if dice have not yet been rolled.

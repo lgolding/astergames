@@ -44,11 +44,26 @@ describe('Game', () => {
       expect(() => game.move(13, 11)).toThrow();
     });
 
-    it('executes a legal move', () => {
+    it('executes a normal move', () => {
       game = game.startTurn([3, 4]);
       game = game.move(13, 9);
       expect(game.points[0].numCheckers).toBe(4);
       expect(game.points[15].numCheckers).toBe(1);
+    });
+
+    it('executes a doubles move', () => {
+      game = game.startTurn([1, 1]);
+      game = game.move(24, 23);
+      game = game.move(24, 23);
+      game = game.move(23, 22);
+      game = game.move(22, 21);
+
+      expect(game.points[11].numCheckers).toBe(0);
+      expect(game.points[10].numCheckers).toBe(1);
+      expect(game.points[10].playerIndex).toBe(PLAYER1);
+      expect(game.points[9].numCheckers).toBe(0);
+      expect(game.points[8].numCheckers).toBe(1);
+      expect(game.points[8].playerIndex).toBe(PLAYER1);
     });
 
     it('alternates players', () => {
