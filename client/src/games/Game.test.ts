@@ -1,7 +1,7 @@
 import Game from './Game';
 import { NUM_DICE, PLAYER1, PLAYER2 } from './constants';
 
-let game;
+let game: Game;
 
 beforeEach(() => {
   game = new Game();
