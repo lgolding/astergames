@@ -3,7 +3,7 @@ import {
   DARK_CHECKER_CLASS_NAME,
   LIGHT_CHECKER_CLASS_NAME,
 } from './classNames';
-import { DRAG_DROP_DATA_FORMAT } from './constants.js';
+import { DRAG_DROP_DATA_FORMAT } from './constants';
 
 const handleDragStart = (
   event: any, // TODO real type
