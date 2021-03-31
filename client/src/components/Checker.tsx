@@ -6,10 +6,10 @@ import {
 import { DRAG_DROP_DATA_FORMAT } from './constants.js';
 
 const handleDragStart = (
-  event,
-  pointIndex,
-  pointPlayerIndex,
-  currentPlayer
+  event: any, // TODO real type
+  pointIndex: number,
+  pointPlayerIndex: number,
+  currentPlayer: number
 ) => {
   console.log(
     `Player ${currentPlayer} started dragging from point ${pointIndex}, which is occupied by player ${pointPlayerIndex}.`
@@ -22,7 +22,7 @@ const handleDragStart = (
   }
 };
 
-const Checker = ({ color, pointIndex, pointPlayerIndex, currentPlayer }) => {
+const Checker = ({ color, pointIndex, pointPlayerIndex, currentPlayer }: any) => { // TODO: real type.
   const checkerColorClass =
     color === CheckerColor.LIGHT
       ? LIGHT_CHECKER_CLASS_NAME
