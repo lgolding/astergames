@@ -1,11 +1,18 @@
+import { FunctionComponent } from 'react';
 import _ from 'lodash';
 import './backgammon.css';
 import Point from './Point';
 import Bar from './Bar';
 import { POINT_NUMBER_CLASS_NAME } from './classNames';
 import { PLAYER1, PLAYER2, POINTS_ON_BOARD } from '../games/constants';
+import Game from '../games/Game';
 
-const BackgammonBoard = ({ game, onMove }) => {
+interface Props {
+  game: Game;
+  onMove(fromPointNumber: number, toPointNumber: number): void;
+}
+
+const BackgammonBoard: FunctionComponent<Props> = ({ game, onMove }) => {
   let indices = _.range(POINTS_ON_BOARD);
 
   return (
@@ -42,7 +49,7 @@ const BackgammonBoard = ({ game, onMove }) => {
           {game.pointIndexToPointNumber(index)}
         </div>
       ))}
-      <Bar player1={game.bar[PLAYER1]} player2={game.bar[PLAYER2]} />
+      <Bar player1={game.bar[PLAYER1]} player2={game.bar[PLAYER2]} currentPlayer={game.currentPlayer} />
     </div>
   );
 };

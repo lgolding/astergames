@@ -1,21 +1,24 @@
-import { useState } from 'react';
+import { useState, FunctionComponent } from 'react';
 import BackgammonBoard from './BackgammonBoard';
 import DicePanel from './DicePanel';
 import Game from '../games/Game';
 
-const BackgammonDisplay = () => {
+interface Props {
+}
+
+const BackgammonDisplay: FunctionComponent<Props> = () => {
   const [game, setGame] = useState(new Game());
 
-  const handleMove = (from, to) => {
+  const handleMove = (fromPointNumber: number, toPointNumber: number) => {
     try {
-      const newGame = game.move(from, to);
+      const newGame = game.move(fromPointNumber, toPointNumber);
       setGame(newGame);
     } catch (err) {
       alert(err.message);
     }
   };
 
-  const handleRoll = roll => {
+  const handleRoll = (roll: number[]) => {
     const newGame = game.startTurn(roll);
     setGame(newGame);
   };

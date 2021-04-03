@@ -1,4 +1,10 @@
-const Die = ({ face }) => {
+import { FunctionComponent } from 'react';
+
+interface Props {
+  face: number;
+}
+
+const Die: FunctionComponent<Props> = ({ face }) => {
   const PIP_RADIUS = 10;
   const VIEW_BOX_WIDTH = 100;
   const VIEW_BOX_HEIGHT = 100;

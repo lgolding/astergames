@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import CheckerColor from '../games/CheckerColor';
 import {
   DARK_CHECKER_CLASS_NAME,
@@ -22,7 +23,14 @@ const handleDragStart = (
   }
 };
 
-const Checker = ({ color, pointIndex, pointPlayerIndex, currentPlayer }: any) => { // TODO: real type.
+interface Props {
+  color: number;
+  pointIndex: number;
+  pointPlayerIndex: number;
+  currentPlayer: number;
+}
+
+const Checker: FunctionComponent<Props> = ({ color, pointIndex, pointPlayerIndex, currentPlayer }) => {
   const checkerColorClass =
     color === CheckerColor.LIGHT
       ? LIGHT_CHECKER_CLASS_NAME

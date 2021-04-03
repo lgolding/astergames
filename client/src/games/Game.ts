@@ -90,7 +90,7 @@ export default class Game {
 
   // Attempt to move a checker from the current player's "from" point
   // to that player's "to" point. Throw an error if the move is illegal.
-  move(fromPointNumber: number, toPointNumber: number) {
+  move(fromPointNumber: number, toPointNumber: number): Game {
     const fromPointIndex = this.pointNumberToPointIndex(fromPointNumber);
     const fromPoint = this.points[fromPointIndex];
 
