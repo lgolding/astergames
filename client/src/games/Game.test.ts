@@ -1,5 +1,5 @@
 import Game from './Game';
-import { NUM_DICE, PLAYER1, PLAYER2 } from './constants';
+import { BAR_POINT_NUMBER, NUM_DICE, PLAYER1, PLAYER2 } from './constants';
 
 let game: Game;
 
@@ -142,6 +142,89 @@ describe('Game', () => {
 
       expect(game.bar[PLAYER1]).toBe(2);
       expect(game.bar[PLAYER2]).toBe(0);
+    });
+
+    it('cannot enter if there are no checkers on the bar', () => {
+      game = game.startTurn([1, 2]);
+      game = game.move(24, 23);
+      game = game.move(24, 22);
+
+      game = game.startTurn([1, 2]);
+
+      game = game.move(6, 5);
+      game = game.move(6, 4);
+
+      game = game.startTurn([1, 2]);
+
+      expect(() => game.move(BAR_POINT_NUMBER, 24)).toThrow();
+    });
+
+    it('enters from the bar to an empty point', () => {
+      game = game.startTurn([1, 2]);
+      game = game.move(24, 23);
+      game = game.move(24, 22);
+
+      game = game.startTurn([4, 3]);
+
+      game = game.move(6, 2);
+      expect(game.bar[PLAYER1]).toBe(1);
+
+      game = game.move(6, 3);
+      expect(game.bar[PLAYER1]).toBe(2);
+
+      game = game.startTurn([1, 4]);
+
+      game = game.move(BAR_POINT_NUMBER, 24);
+      expect(game.bar[PLAYER1]).toBe(1);
+      expect(game.points[11].numCheckers).toBe(1);
+      expect(game.points[11].playerIndex).toBe(PLAYER1);
+
+      game = game.move(BAR_POINT_NUMBER, 21);
+      expect(game.bar[PLAYER1]).toBe(0);
+      expect(game.points[11].numCheckers).toBe(1);
+      expect(game.points[11].playerIndex).toBe(PLAYER1);
+      expect(game.points[8].numCheckers).toBe(1);
+      expect(game.points[8].playerIndex).toBe(PLAYER1);
+    });
+
+    it('enters from the bar and hits a blot', () => {
+      game = game.startTurn([1, 2]);
+      game = game.move(24, 23);
+      game = game.move(24, 22);
+
+      game = game.startTurn([4, 3]);
+
+      game = game.move(6, 2);
+      expect(game.bar[PLAYER1]).toBe(1);
+      expect(game.points[10].playerIndex).toBe(PLAYER2);
+      expect(game.points[10].numCheckers).toBe(1);
+
+      game = game.move(6, 3);
+      expect(game.bar[PLAYER1]).toBe(2);
+      expect(game.points[9].playerIndex).toBe(PLAYER2);
+      expect(game.points[9].numCheckers).toBe(1);
+
+      game = game.startTurn([1, 2]);
+
+      game = game.move(BAR_POINT_NUMBER, 23);
+      expect(game.bar[PLAYER1]).toBe(1);
+      expect(game.points[10].playerIndex).toBe(PLAYER1);
+      expect(game.points[10].numCheckers).toBe(1);
+    });
+
+    it('cannot move from point to point if a checker can be entered from the bar', () => {
+      game = game.startTurn([1, 2]);
+      game = game.move(24, 23);
+      game = game.move(24, 22);
+
+      game = game.startTurn([4, 3]);
+
+      game = game.move(6, 2);
+      game = game.move(6, 3);
+
+      game = game.startTurn([6, 4]);
+
+      expect(() => game.move(13, 7)).toThrow();
     });
   });
 });

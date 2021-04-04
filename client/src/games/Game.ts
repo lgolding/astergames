@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { PLAYER1, PLAYER2, NUM_DIE_FACES } from './constants';
+import { BAR_POINT_NUMBER, PLAYER1, PLAYER2, NUM_DIE_FACES } from './constants';
 import Point from './Point';
 
 export default class Game {
@@ -91,11 +91,22 @@ export default class Game {
   // Attempt to move a checker from the current player's "from" point
   // to that player's "to" point. Throw an error if the move is illegal.
   move(fromPointNumber: number, toPointNumber: number): Game {
-    const fromPointIndex = this.pointNumberToPointIndex(fromPointNumber);
-    const fromPoint = this.points[fromPointIndex];
+    if (fromPointNumber === BAR_POINT_NUMBER) {
+      if (this.bar[this.currentPlayer] === 0) {
+        throw new Error(
+          'You cannot enter from the bar if you do not have a checker on the bar.'
+        );
+      }
+    }
 
-    const toPointIndex = this.pointNumberToPointIndex(toPointNumber);
-    const toPoint = this.points[toPointIndex];
+    if (
+      this.bar[this.currentPlayer] > 0 &&
+      fromPointNumber !== BAR_POINT_NUMBER
+    ) {
+      throw new Error(
+        'You cannot move from point to point if you have a checker on the bar.'
+      );
+    }
 
     if (toPointNumber > fromPointNumber) {
       throw new Error('Cannot move backwards');
@@ -105,9 +116,19 @@ export default class Game {
       throw new Error('Cannot move to the point you started from.');
     }
 
-    if (fromPoint.playerIndex !== this.currentPlayer) {
-      throw new Error('Cannot move from a point you do not occupy.');
+    let fromPointIndex: number | undefined = undefined;
+    let fromPoint: Point | undefined = undefined;
+    if (fromPointNumber !== BAR_POINT_NUMBER) {
+      fromPointIndex = this.pointNumberToPointIndex(fromPointNumber);
+      fromPoint = this.points[fromPointIndex];
+
+      if (fromPoint.playerIndex !== this.currentPlayer) {
+        throw new Error('Cannot move from a point you do not occupy.');
+      }
     }
+
+    const toPointIndex = this.pointNumberToPointIndex(toPointNumber);
+    const toPoint = this.points[toPointIndex];
 
     const moveLength = fromPointNumber - toPointNumber;
 
@@ -128,11 +149,14 @@ export default class Game {
       );
     }
 
-    // TODO: Enter from bar.
-
     const newGame = this.clone();
 
-    --newGame.points[fromPointIndex].numCheckers;
+    if (fromPointIndex !== undefined) {
+      --newGame.points[fromPointIndex].numCheckers;
+    } else {
+      // The checker was entered from the bar.
+      --newGame.bar[this.currentPlayer];
+    }
 
     if (toPoint.playerIndex !== opponent) {
       // A normal move.
