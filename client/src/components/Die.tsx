@@ -2,9 +2,10 @@ import { FunctionComponent } from 'react';
 
 interface Props {
   face: number;
+  active: boolean;
 }
 
-const Die: FunctionComponent<Props> = ({ face }) => {
+const Die: FunctionComponent<Props> = ({ face, active }) => {
   const PIP_RADIUS = 10;
   const VIEW_BOX_WIDTH = 100;
   const VIEW_BOX_HEIGHT = 100;
@@ -16,7 +17,7 @@ const Die: FunctionComponent<Props> = ({ face }) => {
   const BOTTOM_Y = (4 * VIEW_BOX_HEIGHT) / 5;
 
   return (
-    <div className='die'>
+    <div className={`die die--${active ? 'active' : 'inactive'}`}>
       <svg
         width='100%'
         height='100%'

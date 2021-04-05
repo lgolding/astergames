@@ -4,6 +4,8 @@
   --dark-point-color: rgb(61, 33, 13);
   --light-checker-color: white;
   --dark-checker-color: red;
+  --active-die-color: black;
+  --inactive-die-color: lightgray;
 }
 
 .board {
@@ -99,9 +101,19 @@
 .die {
   height: 50px;
   width: 50px;
-  border: 1px solid black;
+  border-width: 1px;
+  border-style: solid;
   border-radius: 10%;
-  fill: black;
+}
+
+.die--active {
+  border-color: var(--active-die-color);
+  fill: var(--active-die-color);
+}
+
+.die--inactive {
+  border-color: var(--inactive-die-color);
+  fill: var(--inactive-die-color);
 }
 
 button {
