@@ -6,7 +6,7 @@ import Game from '../games/Game';
 interface Props {
 }
 
-const BackgammonDisplay: FunctionComponent<Props> = () => {
+const BackgammonGame: FunctionComponent<Props> = () => {
   const [game, setGame] = useState(new Game());
 
   const handleMove = (fromPointNumber: number, toPointNumber: number) => {
@@ -32,6 +32,6 @@ const BackgammonDisplay: FunctionComponent<Props> = () => {
   );
 };
 
-export default BackgammonDisplay;
+export default BackgammonGame;
 
 // TODO: Keep state: don't allow drag if dice have not yet been rolled.

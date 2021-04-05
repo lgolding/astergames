@@ -1,11 +1,11 @@
 import './App.css';
-import BackgammonDisplay from './components/BackgammonDisplay';
+import BackgammonGame from './components/BackgammonGame';
 
 function App() {
   return (
     <div className='App'>
       <header className='App-header'>Welcome to Aster Games!</header>
-      <BackgammonDisplay />
+      <BackgammonGame />
     </div>
   );
 }
