@@ -13,6 +13,7 @@ interface Props {
 
 const Bar: FunctionComponent<Props> = ({ player1, player2, currentPlayer }) => {
   // TODO: Don't assume that player1 has the light checkers.
+  // TODO: Be able to drag from the bar.
   return (
     <div className='bar'>
       {_.range(player1).map(() => (

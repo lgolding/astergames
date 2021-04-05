@@ -4,6 +4,8 @@ import { useState } from 'react';
 import Die from './Die';
 import { NUM_DICE, NUM_DIE_FACES } from '../games/constants';
 
+// TODO: Disable the Roll button if there are any moves left to make from the current roll.
+// Write our first Jest tests of a component to verify this.
 const getRandomFace = () => 1 + Math.floor(Math.random() * NUM_DIE_FACES);
 const makeRoll = () => [getRandomFace(), getRandomFace()];
 
