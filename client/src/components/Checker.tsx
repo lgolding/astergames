@@ -6,6 +6,8 @@ import {
 } from './classNames';
 import { DRAG_DROP_DATA_FORMAT } from './constants';
 
+// TODO: Disable drag when no move is in progress.
+// TODO: Add a Jest test for this.
 const handleDragStart = (
   event: any, // TODO real type
   pointIndex: number,
