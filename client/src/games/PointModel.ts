@@ -1,6 +1,6 @@
 import { NO_PLAYER } from './constants';
 
-export default class Point {
+export default class PointModel {
   playerIndex: number;
   numCheckers: number;
   constructor(playerIndex = NO_PLAYER, numCheckers = 0) {

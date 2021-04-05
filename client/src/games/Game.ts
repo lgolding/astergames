@@ -1,11 +1,11 @@
 import _ from 'lodash';
 import { BAR_POINT_NUMBER, PLAYER1, PLAYER2, NUM_DIE_FACES } from './constants';
-import Point from './Point';
+import PointModel from './PointModel';
 
 export default class Game {
   currentPlayer: number;
   remainingMoves: number[];
-  points: Point[];
+  points: PointModel[];
   bar: number[];
 
   constructor() {
@@ -18,33 +18,33 @@ export default class Game {
     // right. From the point of view of the player at the top ("dark"), the
     // points run from 24 at the bottom right to 1 at the top right.
     this.points = [
-      new Point(PLAYER1, 5),
-      new Point(),
-      new Point(),
-      new Point(),
-      new Point(PLAYER2, 3),
-      new Point(),
+      new PointModel(PLAYER1, 5),
+      new PointModel(),
+      new PointModel(),
+      new PointModel(),
+      new PointModel(PLAYER2, 3),
+      new PointModel(),
 
-      new Point(PLAYER2, 5),
-      new Point(),
-      new Point(),
-      new Point(),
-      new Point(),
-      new Point(PLAYER1, 2),
+      new PointModel(PLAYER2, 5),
+      new PointModel(),
+      new PointModel(),
+      new PointModel(),
+      new PointModel(),
+      new PointModel(PLAYER1, 2),
 
-      new Point(PLAYER2, 5),
-      new Point(),
-      new Point(),
-      new Point(),
-      new Point(PLAYER1, 3),
-      new Point(),
+      new PointModel(PLAYER2, 5),
+      new PointModel(),
+      new PointModel(),
+      new PointModel(),
+      new PointModel(PLAYER1, 3),
+      new PointModel(),
 
-      new Point(PLAYER1, 5),
-      new Point(),
-      new Point(),
-      new Point(),
-      new Point(),
-      new Point(PLAYER2, 2),
+      new PointModel(PLAYER1, 5),
+      new PointModel(),
+      new PointModel(),
+      new PointModel(),
+      new PointModel(),
+      new PointModel(PLAYER2, 2),
     ];
 
     this.bar = [0, 0];
@@ -117,7 +117,7 @@ export default class Game {
     }
 
     let fromPointIndex: number | undefined = undefined;
-    let fromPoint: Point | undefined = undefined;
+    let fromPoint: PointModel | undefined = undefined;
     if (fromPointNumber !== BAR_POINT_NUMBER) {
       fromPointIndex = this.pointNumberToPointIndex(fromPointNumber);
       fromPoint = this.points[fromPointIndex];
