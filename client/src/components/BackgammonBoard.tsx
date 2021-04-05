@@ -13,18 +13,18 @@ interface Props {
 }
 
 const BackgammonBoard: FunctionComponent<Props> = ({ game, onMove }) => {
-  let indices = _.range(POINTS_ON_BOARD);
+  let pointIndices = _.range(POINTS_ON_BOARD);
 
   return (
     <div className='board'>
-      {indices.slice(0, POINTS_ON_BOARD / 4).map(index => (
-        <PointNumber key={index} pointIndex={index} currentPlayerIndex={game.currentPlayer} />
+      {pointIndices.slice(0, POINTS_ON_BOARD / 4).map(pointIndex => (
+        <PointNumber key={pointIndex} pointIndex={pointIndex} currentPlayerIndex={game.currentPlayer} />
         ))}
       <div></div>
-      {indices.slice(POINTS_ON_BOARD / 4, POINTS_ON_BOARD / 2).map(index => (
-        <PointNumber key={index} pointIndex={index} currentPlayerIndex={game.currentPlayer} />
+      {pointIndices.slice(POINTS_ON_BOARD / 4, POINTS_ON_BOARD / 2).map(pointIndex => (
+        <PointNumber key={pointIndex} pointIndex={pointIndex} currentPlayerIndex={game.currentPlayer} />
       ))}
-      {indices.map(pointIndex => (
+      {pointIndices.map(pointIndex => (
         <Point
           key={pointIndex}
           game={game}
@@ -32,14 +32,14 @@ const BackgammonBoard: FunctionComponent<Props> = ({ game, onMove }) => {
           onMove={onMove}
         />
       ))}
-      {indices
+      {pointIndices
         .slice(POINTS_ON_BOARD / 2, (3 * POINTS_ON_BOARD) / 4)
-        .map(index => (
-          <PointNumber key={index} pointIndex={index} currentPlayerIndex={game.currentPlayer} />
+        .map(pointIndex => (
+          <PointNumber key={pointIndex} pointIndex={pointIndex} currentPlayerIndex={game.currentPlayer} />
           ))}
       <div></div>
-      {indices.slice((3 * POINTS_ON_BOARD) / 4, POINTS_ON_BOARD).map(index => (
-        <PointNumber key={index} pointIndex={index} currentPlayerIndex={game.currentPlayer} />
+      {pointIndices.slice((3 * POINTS_ON_BOARD) / 4, POINTS_ON_BOARD).map(pointIndex => (
+        <PointNumber key={pointIndex} pointIndex={pointIndex} currentPlayerIndex={game.currentPlayer} />
         ))}
       <Bar player1={game.bar[PLAYER1]} player2={game.bar[PLAYER2]} currentPlayer={game.currentPlayer} />
     </div>
