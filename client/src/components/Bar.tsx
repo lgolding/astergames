@@ -8,10 +8,10 @@ import './backgammon.css';
 interface Props {
   player1: number;
   player2: number;
-  currentPlayer: number;
+  currentPlayerIndex: number;
 }
 
-const Bar: FunctionComponent<Props> = ({ player1, player2, currentPlayer }) => {
+const Bar: FunctionComponent<Props> = ({ player1, player2, currentPlayerIndex }) => {
   // TODO: Don't assume that player1 has the light checkers.
   // TODO: Be able to drag from the bar.
   return (
@@ -19,10 +19,10 @@ const Bar: FunctionComponent<Props> = ({ player1, player2, currentPlayer }) => {
       {_.range(player1).map(() => (
         // Problem: Checker's drag handler doesn't know how to deal with the bar
         // (or with bearing off, for that matter.)
-        <Checker color={CheckerColor.LIGHT} pointIndex={-1} pointPlayerIndex={NO_PLAYER} currentPlayer={currentPlayer} />
+        <Checker color={CheckerColor.LIGHT} pointIndex={-1} pointPlayerIndex={NO_PLAYER} currentPlayerIndex={currentPlayerIndex} />
       ))}
       {_.range(player2).map(() => (
-        <Checker color={CheckerColor.DARK} pointIndex={-1} pointPlayerIndex={NO_PLAYER} currentPlayer={currentPlayer} />
+        <Checker color={CheckerColor.DARK} pointIndex={-1} pointPlayerIndex={NO_PLAYER} currentPlayerIndex={currentPlayerIndex} />
       ))}{' '}
     </div>
   );

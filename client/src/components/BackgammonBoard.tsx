@@ -41,7 +41,7 @@ const BackgammonBoard: FunctionComponent<Props> = ({ game, onMove }) => {
       {pointIndices.slice((3 * POINTS_ON_BOARD) / 4, POINTS_ON_BOARD).map(pointIndex => (
         <PointNumber key={pointIndex} pointIndex={pointIndex} currentPlayerIndex={game.currentPlayer} />
         ))}
-      <Bar player1={game.bar[PLAYER1]} player2={game.bar[PLAYER2]} currentPlayer={game.currentPlayer} />
+      <Bar player1={game.bar[PLAYER1]} player2={game.bar[PLAYER2]} currentPlayerIndex={game.currentPlayer} />
     </div>
   );
 };

@@ -95,7 +95,7 @@ const Point: FunctionComponent<Props> = ({ pointIndex, game, onMove }) => {
             color={checkerColor}
             pointIndex={pointIndex}
             pointPlayerIndex={point.playerIndex}
-            currentPlayer={currentPlayer}
+            currentPlayerIndex={currentPlayer}
           />
         ))}
       </div>
