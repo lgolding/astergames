@@ -8,7 +8,6 @@ interface Props {
 
 const BackgammonGame: FunctionComponent<Props> = () => {
   const [game, setGame] = useState(new Game());
-  const moveInProgress: boolean = game.remainingMoves.length > 0;
 
   const handleMove = (fromPointNumber: number, toPointNumber: number) => {
     try {
@@ -28,7 +27,7 @@ const BackgammonGame: FunctionComponent<Props> = () => {
     <>
       <div>Current player: {game.currentPlayerIndex + 1}</div>
       <BackgammonBoard game={game} onMove={handleMove} />
-      <DicePanel onRoll={handleRoll} moveInProgress={moveInProgress} />
+      <DicePanel onRoll={handleRoll} diceHaveBeenRolled={game.diceHaveBeenRolled()} />
     </>
   );
 };

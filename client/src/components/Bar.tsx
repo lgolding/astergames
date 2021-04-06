@@ -1,17 +1,18 @@
 import { FunctionComponent } from 'react';
 import _ from 'lodash';
 import Checker from './Checker';
-import { NO_PLAYER } from '../games/constants'
+import { NO_PLAYER, BAR_POINT_NUMBER } from '../games/constants'
 import CheckerColor from '../games/CheckerColor';
+import Game from '../games/Game';
 import './backgammon.css';
 
 interface Props {
   player1: number;
   player2: number;
-  currentPlayerIndex: number;
+  game: Game;
 }
 
-const Bar: FunctionComponent<Props> = ({ player1, player2, currentPlayerIndex }) => {
+const Bar: FunctionComponent<Props> = ({ player1, player2, game }) => {
   // TODO: Don't assume that player1 has the light checkers.
   // TODO: Be able to drag from the bar.
   return (
@@ -19,10 +20,10 @@ const Bar: FunctionComponent<Props> = ({ player1, player2, currentPlayerIndex })
       {_.range(player1).map(() => (
         // Problem: Checker's drag handler doesn't know how to deal with the bar
         // (or with bearing off, for that matter.)
-        <Checker color={CheckerColor.LIGHT} pointIndex={-1} occupyingPlayerIndex={NO_PLAYER} currentPlayerIndex={currentPlayerIndex} />
+        <Checker color={CheckerColor.LIGHT} pointIndex={BAR_POINT_NUMBER} occupyingPlayerIndex={NO_PLAYER} game={game} />
       ))}
       {_.range(player2).map(() => (
-        <Checker color={CheckerColor.DARK} pointIndex={-1} occupyingPlayerIndex={NO_PLAYER} currentPlayerIndex={currentPlayerIndex} />
+        <Checker color={CheckerColor.DARK} pointIndex={BAR_POINT_NUMBER} occupyingPlayerIndex={NO_PLAYER} game={game} />
       ))}{' '}
     </div>
   );

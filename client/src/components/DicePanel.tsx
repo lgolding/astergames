@@ -10,14 +10,14 @@ const getRandomFace = () => 1 + Math.floor(Math.random() * NUM_DIE_FACES);
 const makeRoll = () => [getRandomFace(), getRandomFace()];
 
 interface Props {
-  moveInProgress: boolean;
+  diceHaveBeenRolled: boolean;
   onRoll(roll: number[]): void;
 }
 
-const DicePanel: FunctionComponent<Props> = ({ moveInProgress, onRoll }) => {
+const DicePanel: FunctionComponent<Props> = ({ diceHaveBeenRolled, onRoll }) => {
   const [roll, setRoll] = useState(makeRoll());
 
-  const dice = _.range(NUM_DICE).map(n => <Die key={n} face={roll[n]} active={moveInProgress} />);
+  const dice = _.range(NUM_DICE).map(n => <Die key={n} face={roll[n]} active={diceHaveBeenRolled} />);
 
   const rollDice = () => {
     const newRoll = makeRoll();
@@ -28,7 +28,7 @@ const DicePanel: FunctionComponent<Props> = ({ moveInProgress, onRoll }) => {
   return (
     <div className='dice-panel'>
       {dice}
-      <button disabled={moveInProgress} onClick={rollDice}>Roll</button>
+      <button disabled={diceHaveBeenRolled} onClick={rollDice}>Roll</button>
     </div>
   );
 };

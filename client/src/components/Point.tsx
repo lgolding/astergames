@@ -1,4 +1,4 @@
-import React, {FunctionComponent} from 'react';
+import React from 'react';
 import _ from 'lodash';
 import Checker from './Checker';
 import CheckerColor from '../games/CheckerColor';
@@ -18,7 +18,7 @@ interface Props {
   onMove(fromPointNumber: number, toPointNumber: number): void;
 }
 
-const Point: FunctionComponent<Props> = ({ pointIndex, game, onMove }) => {
+const Point: React.FunctionComponent<Props> = ({ pointIndex, game, onMove }) => {
   const point = game.points[pointIndex];
   const currentPlayerIndex = game.currentPlayerIndex;
 
@@ -95,7 +95,7 @@ const Point: FunctionComponent<Props> = ({ pointIndex, game, onMove }) => {
             color={checkerColor}
             pointIndex={pointIndex}
             occupyingPlayerIndex={point.occupyingPlayerIndex}
-            currentPlayerIndex={currentPlayerIndex}
+            game={game}
           />
         ))}
       </div>

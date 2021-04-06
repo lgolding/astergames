@@ -1,38 +1,40 @@
-import { FunctionComponent } from 'react';
+import React from 'react';
 import CheckerColor from '../games/CheckerColor';
+import Game from '../games/Game';
 import {
   DARK_CHECKER_CLASS_NAME,
   LIGHT_CHECKER_CLASS_NAME,
 } from './classNames';
 import { DRAG_DROP_DATA_FORMAT } from './constants';
 
-// TODO: Disable drag when no move is in progress.
 // TODO: Add a Jest test for this.
 const handleDragStart = (
-  event: any, // TODO real type
+  event: React.DragEvent,
   pointIndex: number,
-  pointPlayerIndex: number,
-  currentPlayer: number
+  occupyingPlayingIndex: number,
+  game: Game
 ) => {
-  console.log(
-    `Player ${currentPlayer} started dragging from point ${pointIndex}, which is occupied by player ${pointPlayerIndex}.`
-  );
-  if (currentPlayer === pointPlayerIndex) {
-    event.dataTransfer.setData(DRAG_DROP_DATA_FORMAT, pointIndex);
-  } else {
-    // Cannot drag from this point because it is not occupied by the current player.
+  if (!game.diceHaveBeenRolled()) {
     event.preventDefault();
+    return;
   }
+
+  if (game.currentPlayerIndex !== occupyingPlayingIndex) {
+    event.preventDefault();
+    return;
+  }
+
+  event.dataTransfer.setData(DRAG_DROP_DATA_FORMAT, pointIndex.toString());
 };
 
 interface Props {
   color: number;
   pointIndex: number;
   occupyingPlayerIndex: number;
-  currentPlayerIndex: number;
+  game: Game;
 }
 
-const Checker: FunctionComponent<Props> = ({ color, pointIndex, occupyingPlayerIndex, currentPlayerIndex }) => {
+const Checker: React.FunctionComponent<Props> = ({ color, pointIndex, occupyingPlayerIndex, game }) => {
   const checkerColorClass =
     color === CheckerColor.LIGHT
       ? LIGHT_CHECKER_CLASS_NAME
@@ -42,7 +44,7 @@ const Checker: FunctionComponent<Props> = ({ color, pointIndex, occupyingPlayerI
       className={`checker ${checkerColorClass}`}
       draggable
       onDragStart={event =>
-        handleDragStart(event, pointIndex, occupyingPlayerIndex, currentPlayerIndex)
+        handleDragStart(event, pointIndex, occupyingPlayerIndex, game)
       }
     ></div>
   );

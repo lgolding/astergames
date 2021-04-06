@@ -50,6 +50,8 @@ export default class Game {
     this.bar = [0, 0];
   }
 
+  diceHaveBeenRolled = (): boolean => this.remainingMoves.length > 0;
+
   // Convert from a "point index" (the index of a point in the
   // this.points array, which corresponds to grid layout order) to
   // a "point number" (the conventional number of the point from the
