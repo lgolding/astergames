@@ -5,7 +5,7 @@ import { GameContext } from './BackgammonGame';
 import Point from './Point';
 import PointNumber from './PointNumber';
 import Bar from './Bar';
-import { PLAYER1, PLAYER2, POINTS_ON_BOARD } from '../games/constants';
+import { POINTS_ON_BOARD } from '../games/constants';
 import Game from '../games/Game';
 
 interface Props {
@@ -41,7 +41,7 @@ const BackgammonBoard: React.FunctionComponent<Props> = ({ onMove }) => {
       {pointIndices.slice((3 * POINTS_ON_BOARD) / 4, POINTS_ON_BOARD).map(pointIndex => (
         <PointNumber key={pointIndex} pointIndex={pointIndex} currentPlayerIndex={game.currentPlayerIndex} />
         ))}
-      <Bar player1={game.bar[PLAYER1]} player2={game.bar[PLAYER2]} game={game} />
+      <Bar />
     </div>
   );
 };
