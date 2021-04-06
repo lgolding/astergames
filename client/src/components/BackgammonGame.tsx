@@ -26,7 +26,7 @@ const BackgammonGame: FunctionComponent<Props> = () => {
 
   return (
     <>
-      <div>Current player: {game.currentPlayer + 1}</div>
+      <div>Current player: {game.currentPlayerIndex + 1}</div>
       <BackgammonBoard game={game} onMove={handleMove} />
       <DicePanel onRoll={handleRoll} moveInProgress={moveInProgress} />
     </>

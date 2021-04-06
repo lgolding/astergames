@@ -60,42 +60,42 @@ describe('Game', () => {
 
       expect(game.points[11].numCheckers).toBe(0);
       expect(game.points[10].numCheckers).toBe(1);
-      expect(game.points[10].playerIndex).toBe(PLAYER1);
+      expect(game.points[10].occupyingPlayerIndex).toBe(PLAYER1);
       expect(game.points[9].numCheckers).toBe(0);
       expect(game.points[8].numCheckers).toBe(1);
-      expect(game.points[8].playerIndex).toBe(PLAYER1);
+      expect(game.points[8].occupyingPlayerIndex).toBe(PLAYER1);
     });
 
     it('alternates players', () => {
-      expect(game.currentPlayer).toBe(PLAYER1);
+      expect(game.currentPlayerIndex).toBe(PLAYER1);
 
       game = game.startTurn([2, 3]);
 
       game = game.move(13, 11);
       expect(game.points[0].numCheckers).toBe(4);
       expect(game.points[13].numCheckers).toBe(1);
-      expect(game.points[13].playerIndex).toBe(PLAYER1);
-      expect(game.currentPlayer).toBe(PLAYER1);
+      expect(game.points[13].occupyingPlayerIndex).toBe(PLAYER1);
+      expect(game.currentPlayerIndex).toBe(PLAYER1);
 
       game = game.move(13, 10);
       expect(game.points[0].numCheckers).toBe(3);
       expect(game.points[14].numCheckers).toBe(1);
-      expect(game.points[14].playerIndex).toBe(PLAYER1);
-      expect(game.currentPlayer).toBe(PLAYER2);
+      expect(game.points[14].occupyingPlayerIndex).toBe(PLAYER1);
+      expect(game.currentPlayerIndex).toBe(PLAYER2);
 
       game = game.startTurn([2, 3]);
 
       game = game.move(13, 11);
       expect(game.points[12].numCheckers).toBe(4);
       expect(game.points[1].numCheckers).toBe(1);
-      expect(game.points[1].playerIndex).toBe(PLAYER2);
-      expect(game.currentPlayer).toBe(PLAYER2);
+      expect(game.points[1].occupyingPlayerIndex).toBe(PLAYER2);
+      expect(game.currentPlayerIndex).toBe(PLAYER2);
 
       game = game.move(13, 10);
       expect(game.points[12].numCheckers).toBe(3);
       expect(game.points[2].numCheckers).toBe(1);
-      expect(game.points[2].playerIndex).toBe(PLAYER2);
-      expect(game.currentPlayer).toBe(PLAYER1);
+      expect(game.points[2].occupyingPlayerIndex).toBe(PLAYER2);
+      expect(game.currentPlayerIndex).toBe(PLAYER1);
     });
 
     it('cannot move player 1 backwards', () => {
@@ -107,7 +107,7 @@ describe('Game', () => {
 
       game = game.move(13, 11);
       game = game.move(13, 10);
-      expect(game.currentPlayer).toBe(PLAYER2);
+      expect(game.currentPlayerIndex).toBe(PLAYER2);
 
       game = game.startTurn([2, 3]);
 
@@ -130,13 +130,13 @@ describe('Game', () => {
       game = game.move(6, 3);
 
       expect(game.points[6].numCheckers).toBe(3);
-      expect(game.points[6].playerIndex).toBe(PLAYER2);
+      expect(game.points[6].occupyingPlayerIndex).toBe(PLAYER2);
 
       expect(game.points[9].numCheckers).toBe(1);
-      expect(game.points[9].playerIndex).toBe(PLAYER2);
+      expect(game.points[9].occupyingPlayerIndex).toBe(PLAYER2);
 
       expect(game.points[10].numCheckers).toBe(1);
-      expect(game.points[10].playerIndex).toBe(PLAYER2);
+      expect(game.points[10].occupyingPlayerIndex).toBe(PLAYER2);
 
       expect(game.points[11].numCheckers).toBe(0);
 
@@ -177,14 +177,14 @@ describe('Game', () => {
       game = game.move(BAR_POINT_NUMBER, 24);
       expect(game.bar[PLAYER1]).toBe(1);
       expect(game.points[11].numCheckers).toBe(1);
-      expect(game.points[11].playerIndex).toBe(PLAYER1);
+      expect(game.points[11].occupyingPlayerIndex).toBe(PLAYER1);
 
       game = game.move(BAR_POINT_NUMBER, 21);
       expect(game.bar[PLAYER1]).toBe(0);
       expect(game.points[11].numCheckers).toBe(1);
-      expect(game.points[11].playerIndex).toBe(PLAYER1);
+      expect(game.points[11].occupyingPlayerIndex).toBe(PLAYER1);
       expect(game.points[8].numCheckers).toBe(1);
-      expect(game.points[8].playerIndex).toBe(PLAYER1);
+      expect(game.points[8].occupyingPlayerIndex).toBe(PLAYER1);
     });
 
     it('enters from the bar and hits a blot', () => {
@@ -196,19 +196,19 @@ describe('Game', () => {
 
       game = game.move(6, 2);
       expect(game.bar[PLAYER1]).toBe(1);
-      expect(game.points[10].playerIndex).toBe(PLAYER2);
+      expect(game.points[10].occupyingPlayerIndex).toBe(PLAYER2);
       expect(game.points[10].numCheckers).toBe(1);
 
       game = game.move(6, 3);
       expect(game.bar[PLAYER1]).toBe(2);
-      expect(game.points[9].playerIndex).toBe(PLAYER2);
+      expect(game.points[9].occupyingPlayerIndex).toBe(PLAYER2);
       expect(game.points[9].numCheckers).toBe(1);
 
       game = game.startTurn([1, 2]);
 
       game = game.move(BAR_POINT_NUMBER, 23);
       expect(game.bar[PLAYER1]).toBe(1);
-      expect(game.points[10].playerIndex).toBe(PLAYER1);
+      expect(game.points[10].occupyingPlayerIndex).toBe(PLAYER1);
       expect(game.points[10].numCheckers).toBe(1);
     });
 

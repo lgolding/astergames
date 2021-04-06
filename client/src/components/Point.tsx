@@ -20,7 +20,7 @@ interface Props {
 
 const Point: FunctionComponent<Props> = ({ pointIndex, game, onMove }) => {
   const point = game.points[pointIndex];
-  const currentPlayer = game.currentPlayer;
+  const currentPlayerIndex = game.currentPlayerIndex;
 
   let pointColorClass;
   if (pointIndex < POINTS_ON_ROW) {
@@ -42,7 +42,7 @@ const Point: FunctionComponent<Props> = ({ pointIndex, game, onMove }) => {
   }
 
   const checkerColor =
-    point.playerIndex === PLAYER1 ? CheckerColor.LIGHT : CheckerColor.DARK;
+    point.occupyingPlayerIndex === PLAYER1 ? CheckerColor.LIGHT : CheckerColor.DARK;
   const numCheckers = point.numCheckers;
 
   const checkerIndices = _.range(numCheckers);
@@ -61,7 +61,7 @@ const Point: FunctionComponent<Props> = ({ pointIndex, game, onMove }) => {
     const toPointNumber = game.pointIndexToPointNumber(pointIndex);
 
     console.log(
-      `Player ${currentPlayer} dragged from point ${fromPointNumber} (index ${startPointIndex}) to point ${toPointNumber} (index ${pointIndex}).`
+      `Player ${currentPlayerIndex} dragged from point ${fromPointNumber} (index ${startPointIndex}) to point ${toPointNumber} (index ${pointIndex}).`
     );
 
     onMove(fromPointNumber, toPointNumber);
@@ -94,8 +94,8 @@ const Point: FunctionComponent<Props> = ({ pointIndex, game, onMove }) => {
             key={100 * pointIndex + checkerIndex}
             color={checkerColor}
             pointIndex={pointIndex}
-            pointPlayerIndex={point.playerIndex}
-            currentPlayerIndex={currentPlayer}
+            occupyingPlayerIndex={point.occupyingPlayerIndex}
+            currentPlayerIndex={currentPlayerIndex}
           />
         ))}
       </div>

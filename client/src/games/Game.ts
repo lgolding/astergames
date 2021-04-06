@@ -3,13 +3,13 @@ import { BAR_POINT_NUMBER, PLAYER1, PLAYER2, NUM_DIE_FACES } from './constants';
 import PointModel from './PointModel';
 
 export default class Game {
-  currentPlayer: number;
+  currentPlayerIndex: number;
   remainingMoves: number[];
   points: PointModel[];
   bar: number[];
 
   constructor() {
-    this.currentPlayer = PLAYER1;
+    this.currentPlayerIndex = PLAYER1;
     this.remainingMoves = [];
 
     // The point indices run in grid layout order, from 0 at the top left to 23
@@ -55,7 +55,7 @@ export default class Game {
   // a "point number" (the conventional number of the point from the
   // point of view of the current player).
   pointIndexToPointNumber(pointIndex: number): number {
-    if (this.currentPlayer === PLAYER1) {
+    if (this.currentPlayerIndex === PLAYER1) {
       return pointIndex < 12 ? 13 + pointIndex : 24 - pointIndex;
     } else {
       return pointIndex < 12 ? 12 - pointIndex : 1 + pointIndex;
@@ -67,7 +67,7 @@ export default class Game {
   // (the index of a point in the this.points array, which corresponds to
   // grid layout order.
   pointNumberToPointIndex(pointNumber: number): number {
-    if (this.currentPlayer === PLAYER1) {
+    if (this.currentPlayerIndex === PLAYER1) {
       return pointNumber > 12 ? pointNumber - 13 : 24 - pointNumber;
     } else {
       return pointNumber > 12 ? pointNumber - 1 : 12 - pointNumber;
@@ -92,7 +92,7 @@ export default class Game {
   // to that player's "to" point. Throw an error if the move is illegal.
   move(fromPointNumber: number, toPointNumber: number): Game {
     if (fromPointNumber === BAR_POINT_NUMBER) {
-      if (this.bar[this.currentPlayer] === 0) {
+      if (this.bar[this.currentPlayerIndex] === 0) {
         throw new Error(
           'You cannot enter from the bar if you do not have a checker on the bar.'
         );
@@ -100,7 +100,7 @@ export default class Game {
     }
 
     if (
-      this.bar[this.currentPlayer] > 0 &&
+      this.bar[this.currentPlayerIndex] > 0 &&
       fromPointNumber !== BAR_POINT_NUMBER
     ) {
       throw new Error(
@@ -122,7 +122,7 @@ export default class Game {
       fromPointIndex = this.pointNumberToPointIndex(fromPointNumber);
       fromPoint = this.points[fromPointIndex];
 
-      if (fromPoint.playerIndex !== this.currentPlayer) {
+      if (fromPoint.occupyingPlayerIndex !== this.currentPlayerIndex) {
         throw new Error('Cannot move from a point you do not occupy.');
       }
     }
@@ -141,9 +141,9 @@ export default class Game {
       throw new Error(`You did not roll a ${moveLength}`);
     }
 
-    const opponent = this.currentPlayer === PLAYER1 ? PLAYER2 : PLAYER1;
+    const opponent = this.currentPlayerIndex === PLAYER1 ? PLAYER2 : PLAYER1;
 
-    if (toPoint.playerIndex === opponent && toPoint.numCheckers > 1) {
+    if (toPoint.occupyingPlayerIndex === opponent && toPoint.numCheckers > 1) {
       throw new Error(
         'Cannot move to a non-blot point occupied by the opponent.'
       );
@@ -155,10 +155,10 @@ export default class Game {
       --newGame.points[fromPointIndex].numCheckers;
     } else {
       // The checker was entered from the bar.
-      --newGame.bar[this.currentPlayer];
+      --newGame.bar[this.currentPlayerIndex];
     }
 
-    if (toPoint.playerIndex !== opponent) {
+    if (toPoint.occupyingPlayerIndex !== opponent) {
       // A normal move.
       ++newGame.points[toPointIndex].numCheckers;
     } else {
@@ -166,14 +166,14 @@ export default class Game {
       ++newGame.bar[opponent];
     }
 
-    newGame.points[toPointIndex].playerIndex = this.currentPlayer;
+    newGame.points[toPointIndex].occupyingPlayerIndex = this.currentPlayerIndex;
 
     newGame.remainingMoves = this.remainingMoves
       .slice(0, index)
       .concat(this.remainingMoves.slice(index + 1, this.remainingMoves.length));
 
     if (newGame.remainingMoves.length === 0) {
-      newGame.currentPlayer = opponent;
+      newGame.currentPlayerIndex = opponent;
     }
 
     return newGame;
@@ -181,7 +181,7 @@ export default class Game {
 
   /* private */ clone() {
     const newGame = new Game();
-    newGame.currentPlayer = this.currentPlayer;
+    newGame.currentPlayerIndex = this.currentPlayerIndex;
     newGame.points = this.points;
     newGame.bar = this.bar;
     newGame.remainingMoves = this.remainingMoves;
