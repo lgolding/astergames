@@ -28,11 +28,11 @@ const handleDragStart = (
 interface Props {
   color: number;
   pointIndex: number;
-  pointPlayerIndex: number;
+  occupyingPlayerIndex: number;
   currentPlayerIndex: number;
 }
 
-const Checker: FunctionComponent<Props> = ({ color, pointIndex, pointPlayerIndex, currentPlayerIndex }) => {
+const Checker: FunctionComponent<Props> = ({ color, pointIndex, occupyingPlayerIndex, currentPlayerIndex }) => {
   const checkerColorClass =
     color === CheckerColor.LIGHT
       ? LIGHT_CHECKER_CLASS_NAME
@@ -42,7 +42,7 @@ const Checker: FunctionComponent<Props> = ({ color, pointIndex, pointPlayerIndex
       className={`checker ${checkerColorClass}`}
       draggable
       onDragStart={event =>
-        handleDragStart(event, pointIndex, pointPlayerIndex, currentPlayerIndex)
+        handleDragStart(event, pointIndex, occupyingPlayerIndex, currentPlayerIndex)
       }
     ></div>
   );

@@ -19,10 +19,10 @@ const Bar: FunctionComponent<Props> = ({ player1, player2, currentPlayerIndex })
       {_.range(player1).map(() => (
         // Problem: Checker's drag handler doesn't know how to deal with the bar
         // (or with bearing off, for that matter.)
-        <Checker color={CheckerColor.LIGHT} pointIndex={-1} pointPlayerIndex={NO_PLAYER} currentPlayerIndex={currentPlayerIndex} />
+        <Checker color={CheckerColor.LIGHT} pointIndex={-1} occupyingPlayerIndex={NO_PLAYER} currentPlayerIndex={currentPlayerIndex} />
       ))}
       {_.range(player2).map(() => (
-        <Checker color={CheckerColor.DARK} pointIndex={-1} pointPlayerIndex={NO_PLAYER} currentPlayerIndex={currentPlayerIndex} />
+        <Checker color={CheckerColor.DARK} pointIndex={-1} occupyingPlayerIndex={NO_PLAYER} currentPlayerIndex={currentPlayerIndex} />
       ))}{' '}
     </div>
   );
