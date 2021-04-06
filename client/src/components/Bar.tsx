@@ -12,7 +12,6 @@ interface Props {
 
 const Bar: React.FunctionComponent<Props> = () => {
   // TODO: Don't assume that player1 has the light checkers.
-  // TODO: Be able to drag from the bar.
 
   const game: Game = useContext(GameContext);
   const numPlayer1Checkers = game.bar[PLAYER1];
@@ -21,12 +20,12 @@ const Bar: React.FunctionComponent<Props> = () => {
   return (
     <div className='bar'>
       {_.range(numPlayer1Checkers).map(() => (
-        // Problem: Checker's drag handler doesn't know how to deal with the bar
+        // TODO: Checker's drag handler doesn't know how to deal with the bar
         // (or with bearing off, for that matter.)
-        <Checker color={CheckerColor.LIGHT} pointIndex={BAR_POINT_NUMBER} occupyingPlayerIndex={NO_PLAYER} game={game} />
+        <Checker color={CheckerColor.LIGHT} pointIndex={BAR_POINT_NUMBER} occupyingPlayerIndex={NO_PLAYER} />
       ))}
       {_.range(numPlayer2Checkers).map(() => (
-        <Checker color={CheckerColor.DARK} pointIndex={BAR_POINT_NUMBER} occupyingPlayerIndex={NO_PLAYER} game={game} />
+        <Checker color={CheckerColor.DARK} pointIndex={BAR_POINT_NUMBER} occupyingPlayerIndex={NO_PLAYER} />
       ))}{' '}
     </div>
   );

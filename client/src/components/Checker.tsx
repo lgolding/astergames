@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { GameContext } from './BackgammonGame';
 import CheckerColor from '../games/CheckerColor';
 import Game from '../games/Game';
 import {
@@ -31,10 +32,11 @@ interface Props {
   color: number;
   pointIndex: number;
   occupyingPlayerIndex: number;
-  game: Game;
 }
 
-const Checker: React.FunctionComponent<Props> = ({ color, pointIndex, occupyingPlayerIndex, game }) => {
+const Checker: React.FunctionComponent<Props> = ({ color, pointIndex, occupyingPlayerIndex }) => {
+  const game: Game = useContext(GameContext);
+
   const checkerColorClass =
     color === CheckerColor.LIGHT
       ? LIGHT_CHECKER_CLASS_NAME
