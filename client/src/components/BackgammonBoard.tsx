@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import React from 'react';
 import _ from 'lodash';
 import './backgammon.css';
 import Point from './Point';
@@ -12,7 +12,7 @@ interface Props {
   onMove(fromPointNumber: number, toPointNumber: number): void;
 }
 
-const BackgammonBoard: FunctionComponent<Props> = ({ game, onMove }) => {
+const BackgammonBoard: React.FunctionComponent<Props> = ({ game, onMove }) => {
   let pointIndices = _.range(POINTS_ON_BOARD);
 
   return (

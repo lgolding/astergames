@@ -1,4 +1,4 @@
-import { useState, FunctionComponent } from 'react';
+import React, { useState } from 'react';
 import BackgammonBoard from './BackgammonBoard';
 import DicePanel from './DicePanel';
 import Game from '../games/Game';
@@ -6,7 +6,7 @@ import Game from '../games/Game';
 interface Props {
 }
 
-const BackgammonGame: FunctionComponent<Props> = () => {
+const BackgammonGame: React.FunctionComponent<Props> = () => {
   const [game, setGame] = useState(new Game());
 
   const handleMove = (fromPointNumber: number, toPointNumber: number) => {

@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import React from 'react';
 import _ from 'lodash';
 import Checker from './Checker';
 import { NO_PLAYER, BAR_POINT_NUMBER } from '../games/constants'
@@ -12,7 +12,7 @@ interface Props {
   game: Game;
 }
 
-const Bar: FunctionComponent<Props> = ({ player1, player2, game }) => {
+const Bar: React.FunctionComponent<Props> = ({ player1, player2, game }) => {
   // TODO: Don't assume that player1 has the light checkers.
   // TODO: Be able to drag from the bar.
   return (

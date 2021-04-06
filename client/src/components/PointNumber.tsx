@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import React from 'react'
 import { POINT_NUMBER_CLASS_NAME } from './classNames';
 import { PLAYER1 } from '../games/constants';
 
@@ -18,7 +18,7 @@ const pointIndexToPointNumber = (pointIndex: number, currentPlayerIndex: number)
   }
 };
 
-const PointNumber: FunctionComponent<Props> = ({pointIndex, currentPlayerIndex})  => (
+const PointNumber: React.FunctionComponent<Props> = ({pointIndex, currentPlayerIndex})  => (
     <div className={POINT_NUMBER_CLASS_NAME}>
         {pointIndexToPointNumber(pointIndex, currentPlayerIndex)}
     </div>

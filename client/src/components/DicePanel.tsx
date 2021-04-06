@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import React from 'react';
 import _ from 'lodash';
 import { useState } from 'react';
 import Die from './Die';
@@ -14,7 +14,7 @@ interface Props {
   onRoll(roll: number[]): void;
 }
 
-const DicePanel: FunctionComponent<Props> = ({ diceHaveBeenRolled, onRoll }) => {
+const DicePanel: React.FunctionComponent<Props> = ({ diceHaveBeenRolled, onRoll }) => {
   const [roll, setRoll] = useState(makeRoll());
 
   const dice = _.range(NUM_DICE).map(n => <Die key={n} face={roll[n]} active={diceHaveBeenRolled} />);

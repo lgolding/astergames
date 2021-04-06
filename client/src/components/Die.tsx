@@ -1,11 +1,11 @@
-import { FunctionComponent } from 'react';
+import React from 'react';
 
 interface Props {
   face: number;
   active: boolean;
 }
 
-const Die: FunctionComponent<Props> = ({ face, active }) => {
+const Die: React.FunctionComponent<Props> = ({ face, active }) => {
   const PIP_RADIUS = 10;
   const VIEW_BOX_WIDTH = 100;
   const VIEW_BOX_HEIGHT = 100;
