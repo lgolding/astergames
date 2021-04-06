@@ -1,8 +1,10 @@
 import _ from 'lodash';
+import produce, { immerable } from 'immer';
 import { BAR_POINT_NUMBER, PLAYER1, PLAYER2, NUM_DIE_FACES } from './constants';
 import PointModel from './PointModel';
 
 export default class Game {
+  [immerable] = true;
   currentPlayerIndex: number;
   remainingMoves: number[];
   points: PointModel[];
@@ -83,10 +85,10 @@ export default class Game {
   }
 
   startTurn(roll: number[]): Game {
-    // TODO: This constant cloning is ridiculous. It's inefficient and it leads to bugs
-    // where I forget to assign the new game back to the local variable.
-    const newGame = this.clone();
-    newGame.remainingMoves = Game.getMovesFromRoll(roll);
+    const newGame = produce(this, draftGame => {
+      draftGame.remainingMoves = Game.getMovesFromRoll(roll);
+    });
+
     return newGame;
   }
 
@@ -151,42 +153,37 @@ export default class Game {
       );
     }
 
-    const newGame = this.clone();
+    const newGame = produce(this, draftGame => {
+      if (fromPointIndex !== undefined) {
+        --draftGame.points[fromPointIndex].numCheckers;
+      } else {
+        // The checker was entered from the bar.
+        --draftGame.bar[this.currentPlayerIndex];
+      }
 
-    if (fromPointIndex !== undefined) {
-      --newGame.points[fromPointIndex].numCheckers;
-    } else {
-      // The checker was entered from the bar.
-      --newGame.bar[this.currentPlayerIndex];
-    }
+      if (toPoint.occupyingPlayerIndex !== opponent) {
+        // A normal move.
+        ++draftGame.points[toPointIndex].numCheckers;
+      } else {
+        // Hit the blot.
+        ++draftGame.bar[opponent];
+      }
 
-    if (toPoint.occupyingPlayerIndex !== opponent) {
-      // A normal move.
-      ++newGame.points[toPointIndex].numCheckers;
-    } else {
-      // Hit the blot.
-      ++newGame.bar[opponent];
-    }
+      draftGame.points[
+        toPointIndex
+      ].occupyingPlayerIndex = this.currentPlayerIndex;
 
-    newGame.points[toPointIndex].occupyingPlayerIndex = this.currentPlayerIndex;
+      draftGame.remainingMoves = this.remainingMoves
+        .slice(0, index)
+        .concat(
+          this.remainingMoves.slice(index + 1, this.remainingMoves.length)
+        );
 
-    newGame.remainingMoves = this.remainingMoves
-      .slice(0, index)
-      .concat(this.remainingMoves.slice(index + 1, this.remainingMoves.length));
+      if (draftGame.remainingMoves.length === 0) {
+        draftGame.currentPlayerIndex = opponent;
+      }
+    });
 
-    if (newGame.remainingMoves.length === 0) {
-      newGame.currentPlayerIndex = opponent;
-    }
-
-    return newGame;
-  }
-
-  /* private */ clone() {
-    const newGame = new Game();
-    newGame.currentPlayerIndex = this.currentPlayerIndex;
-    newGame.points = this.points;
-    newGame.bar = this.bar;
-    newGame.remainingMoves = this.remainingMoves;
     return newGame;
   }
 }

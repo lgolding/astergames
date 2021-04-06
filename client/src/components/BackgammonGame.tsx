@@ -37,5 +37,3 @@ const BackgammonGame: React.FunctionComponent<Props> = () => {
 };
 
 export default BackgammonGame;
-
-// TODO: Keep state: don't allow drag if dice have not yet been rolled.
