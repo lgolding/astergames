@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { GameContext } from './BackgammonGame';
 import { POINT_NUMBER_CLASS_NAME } from './classNames';
 import { PLAYER1 } from '../games/constants';
+import Game from '../games/Game';
 
 interface Props {
   pointIndex: number;
-  currentPlayerIndex: number;
 }
 
 // Convert from a "point index" (the index of a point in the board's array of points,
@@ -18,10 +19,14 @@ const pointIndexToPointNumber = (pointIndex: number, currentPlayerIndex: number)
   }
 };
 
-const PointNumber: React.FunctionComponent<Props> = ({pointIndex, currentPlayerIndex})  => (
+const PointNumber: React.FunctionComponent<Props> = ({pointIndex})  => {
+  const game: Game = useContext(GameContext);
+
+  return (
     <div className={POINT_NUMBER_CLASS_NAME}>
-        {pointIndexToPointNumber(pointIndex, currentPlayerIndex)}
+        {pointIndexToPointNumber(pointIndex, game.currentPlayerIndex)}
     </div>
-);
+)
+  };
 
 export default PointNumber
