@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import _ from 'lodash';
 import './backgammon.css';
+import { GameContext } from './BackgammonGame';
 import Point from './Point';
 import PointNumber from './PointNumber';
 import Bar from './Bar';
@@ -8,12 +9,12 @@ import { PLAYER1, PLAYER2, POINTS_ON_BOARD } from '../games/constants';
 import Game from '../games/Game';
 
 interface Props {
-  game: Game;
   onMove(fromPointNumber: number, toPointNumber: number): void;
 }
 
-const BackgammonBoard: React.FunctionComponent<Props> = ({ game, onMove }) => {
+const BackgammonBoard: React.FunctionComponent<Props> = ({ onMove }) => {
   let pointIndices = _.range(POINTS_ON_BOARD);
+  const game: Game = useContext(GameContext);
 
   return (
     <div className='board'>
