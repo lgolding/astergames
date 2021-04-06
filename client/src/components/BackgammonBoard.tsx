@@ -28,7 +28,6 @@ const BackgammonBoard: React.FunctionComponent<Props> = ({ onMove }) => {
       {pointIndices.map(pointIndex => (
         <Point
           key={pointIndex}
-          game={game}
           pointIndex={pointIndex}
           onMove={onMove}
         />
