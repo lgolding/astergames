@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import { DIE_ROLE, DIE_CLASS, DIE_ACTIVE_CLASS, DIE_INACTIVE_CLASS } from './Die';
 import DicePanel from './DicePanel';
 import { NUM_DICE } from '../games/constants';
@@ -10,14 +11,14 @@ describe('DicePanel', () => {
     render(<DicePanel diceHaveBeenRolled={false} onRoll={doNothing}/>);
 
     const rollButton: HTMLButtonElement = screen.getByText('Roll') as HTMLButtonElement;
-    expect(rollButton.disabled).toBe(false);
+    expect(rollButton).toBeEnabled();
 
     const dice: HTMLElement[] = screen.getAllByRole(DIE_ROLE);
     expect(dice.length).toBe(NUM_DICE);
 
     dice.forEach((die: HTMLElement) => {
-      expect(die.getAttribute('class')).toContain(DIE_CLASS);
-      expect(die.getAttribute('class')).toContain(DIE_INACTIVE_CLASS);
+      expect(die).toHaveClass(DIE_CLASS);
+      expect(die).toHaveClass(DIE_INACTIVE_CLASS);
     });
   });
 
@@ -25,14 +26,14 @@ describe('DicePanel', () => {
     render(<DicePanel diceHaveBeenRolled={true} onRoll={doNothing}/>);
 
     const rollButton: HTMLButtonElement = screen.getByText('Roll') as HTMLButtonElement;
-    expect(rollButton.disabled).toBe(true);
+    expect(rollButton).toBeDisabled();
 
     const dice: HTMLElement[] = screen.getAllByRole(DIE_ROLE);
     expect(dice.length).toBe(NUM_DICE);
 
     dice.forEach((die: HTMLElement) => {
-      expect(die.getAttribute('class')).toContain(DIE_CLASS);
-      expect(die.getAttribute('class')).toContain(DIE_ACTIVE_CLASS);
+      expect(die).toHaveClass(DIE_CLASS);
+      expect(die).toHaveClass(DIE_ACTIVE_CLASS);
     });
   });
 });
