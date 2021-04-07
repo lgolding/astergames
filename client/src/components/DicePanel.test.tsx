@@ -1,9 +1,38 @@
-import ReactDOM from 'react-dom';
+import { render, screen } from '@testing-library/react';
+import { DIE_ROLE, DIE_CLASS, DIE_ACTIVE_CLASS, DIE_INACTIVE_CLASS } from './Die';
 import DicePanel from './DicePanel';
+import { NUM_DICE } from '../games/constants';
+
+const doNothing = () => {};
 
 describe('DicePanel', () => {
-  it('renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<DicePanel diceHaveBeenRolled={false} onRoll={(roll: number[]) => {}}/>, div);
+  it('enables the Roll button and grays the dice if the dice have not been rolled', () => {
+    render(<DicePanel diceHaveBeenRolled={false} onRoll={doNothing}/>);
+
+    const rollButton: HTMLButtonElement = screen.getByText('Roll') as HTMLButtonElement;
+    expect(rollButton.disabled).toBe(false);
+
+    const dice: HTMLElement[] = screen.getAllByRole(DIE_ROLE);
+    expect(dice.length).toBe(NUM_DICE);
+
+    dice.forEach((die: HTMLElement) => {
+      expect(die.getAttribute('class')).toContain(DIE_CLASS);
+      expect(die.getAttribute('class')).toContain(DIE_INACTIVE_CLASS);
+    });
+  });
+
+  it('disables the Roll button and un-grays the dice once the dice have been rolled', () => {
+    render(<DicePanel diceHaveBeenRolled={true} onRoll={doNothing}/>);
+
+    const rollButton: HTMLButtonElement = screen.getByText('Roll') as HTMLButtonElement;
+    expect(rollButton.disabled).toBe(true);
+
+    const dice: HTMLElement[] = screen.getAllByRole(DIE_ROLE);
+    expect(dice.length).toBe(NUM_DICE);
+
+    dice.forEach((die: HTMLElement) => {
+      expect(die.getAttribute('class')).toContain(DIE_CLASS);
+      expect(die.getAttribute('class')).toContain(DIE_ACTIVE_CLASS);
+    });
   });
 });

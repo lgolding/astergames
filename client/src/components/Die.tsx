@@ -1,5 +1,10 @@
 import React from 'react';
 
+export const DIE_ROLE = 'die';
+export const DIE_CLASS = 'die';
+export const DIE_ACTIVE_CLASS = 'die--active';
+export const DIE_INACTIVE_CLASS = 'die--inactive';
+
 interface Props {
   face: number;
   active: boolean;
@@ -16,8 +21,10 @@ const Die: React.FunctionComponent<Props> = ({ face, active }) => {
   const TOP_Y = VIEW_BOX_HEIGHT / 5;
   const BOTTOM_Y = (4 * VIEW_BOX_HEIGHT) / 5;
 
+  const dieClass: string = `${DIE_CLASS} ${active ? DIE_ACTIVE_CLASS : DIE_INACTIVE_CLASS}`;
+
   return (
-    <div className={`die die--${active ? 'active' : 'inactive'}`}>
+    <div role={DIE_ROLE} className={dieClass}>
       <svg
         width='100%'
         height='100%'
