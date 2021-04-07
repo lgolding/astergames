@@ -1,9 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { DIE_ROLE, DIE_CLASS, DIE_ACTIVE_CLASS, DIE_INACTIVE_CLASS } from './Die';
 import DicePanel from './DicePanel';
+import { doNothing } from './testUtilities';
 import { NUM_DICE } from '../games/constants';
-
-const doNothing = () => {};
 
 describe('DicePanel', () => {
   it('enables the Roll button and grays the dice if the dice have not been rolled', () => {
