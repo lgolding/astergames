@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import { DIE_ROLE, DIE_CLASS, DIE_ACTIVE_CLASS, DIE_INACTIVE_CLASS } from './Die';
 import DicePanel from './DicePanel';
 import { NUM_DICE } from '../games/constants';
