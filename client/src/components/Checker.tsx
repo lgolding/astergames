@@ -7,12 +7,12 @@ import {
   LIGHT_CHECKER_CLASS_NAME,
 } from './classNames';
 import { DRAG_DROP_DATA_FORMAT } from './constants';
+import { BAR_POINT_NUMBER } from '../games/constants';
 
 // TODO: Add a Jest test for this.
 const handleDragStart = (
   event: React.DragEvent,
   pointIndex: number,
-  occupyingPlayingIndex: number,
   game: Game
 ) => {
   if (!game.diceHaveBeenRolled()) {
@@ -20,7 +20,12 @@ const handleDragStart = (
     return;
   }
 
-  if (game.currentPlayerIndex !== occupyingPlayingIndex) {
+  if (pointIndex === BAR_POINT_NUMBER && game.bar[game.currentPlayerIndex] === 0) {
+    event.preventDefault();
+    return;
+  }
+
+  if (pointIndex !== BAR_POINT_NUMBER && game.currentPlayerIndex !== game.points[pointIndex].occupyingPlayerIndex) {
     event.preventDefault();
     return;
   }
@@ -31,10 +36,9 @@ const handleDragStart = (
 interface Props {
   color: number;
   pointIndex: number;
-  occupyingPlayerIndex: number;
 }
 
-const Checker: React.FunctionComponent<Props> = ({ color, pointIndex, occupyingPlayerIndex }) => {
+const Checker: React.FunctionComponent<Props> = ({ color, pointIndex }) => {
   const game: Game = useContext(GameContext);
 
   const checkerColorClass =
@@ -46,7 +50,7 @@ const Checker: React.FunctionComponent<Props> = ({ color, pointIndex, occupyingP
       className={`checker ${checkerColorClass}`}
       draggable
       onDragStart={event =>
-        handleDragStart(event, pointIndex, occupyingPlayerIndex, game)
+        handleDragStart(event, pointIndex, game)
       }
     ></div>
   );

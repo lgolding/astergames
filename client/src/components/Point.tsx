@@ -96,7 +96,6 @@ const Point: React.FunctionComponent<Props> = ({ pointIndex, onMove }) => {
             key={100 * pointIndex + checkerIndex}
             color={checkerColor}
             pointIndex={pointIndex}
-            occupyingPlayerIndex={point.occupyingPlayerIndex}
           />
         ))}
       </div>

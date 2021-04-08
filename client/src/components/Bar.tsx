@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import _ from 'lodash';
 import Checker from './Checker';
 import { GameContext } from './BackgammonGame';
-import { NO_PLAYER, BAR_POINT_NUMBER, PLAYER1, PLAYER2 } from '../games/constants'
+import { BAR_POINT_NUMBER, PLAYER1, PLAYER2 } from '../games/constants'
 import CheckerColor from '../games/CheckerColor';
 import Game from '../games/Game';
 import './backgammon.css';
@@ -22,10 +22,10 @@ const Bar: React.FunctionComponent<Props> = () => {
       {_.range(numPlayer1Checkers).map(() => (
         // TODO: Checker's drag handler doesn't know how to deal with the bar
         // (or with bearing off, for that matter.)
-        <Checker color={CheckerColor.LIGHT} pointIndex={BAR_POINT_NUMBER} occupyingPlayerIndex={NO_PLAYER} />
+        <Checker color={CheckerColor.LIGHT} pointIndex={BAR_POINT_NUMBER} />
       ))}
       {_.range(numPlayer2Checkers).map(() => (
-        <Checker color={CheckerColor.DARK} pointIndex={BAR_POINT_NUMBER} occupyingPlayerIndex={NO_PLAYER} />
+        <Checker color={CheckerColor.DARK} pointIndex={BAR_POINT_NUMBER} />
       ))}{' '}
     </div>
   );
