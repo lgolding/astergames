@@ -67,6 +67,10 @@ export default class Game {
   // a "point number" (the conventional number of the point from the
   // point of view of the current player).
   pointIndexToPointNumber(pointIndex: number): number {
+    if (pointIndex === BAR_POINT_NUMBER) {
+      return BAR_POINT_NUMBER;
+    }
+
     if (this.currentPlayerIndex === PLAYER1) {
       return pointIndex < 12 ? 13 + pointIndex : 24 - pointIndex;
     } else {

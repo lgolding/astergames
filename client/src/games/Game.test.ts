@@ -14,6 +14,34 @@ beforeEach(() => {
 });
 
 describe('Game', () => {
+  describe('pointIndexToPointNumber', () => {
+    it('correctly converts a normal point', () => {
+      game.currentPlayerIndex = PLAYER1;
+      expect(game.pointIndexToPointNumber(0)).toBe(13);
+      expect(game.pointIndexToPointNumber(23)).toBe(1);
+      expect(game.pointIndexToPointNumber(11)).toBe(24);
+      expect(game.pointIndexToPointNumber(12)).toBe(12);
+
+      game.currentPlayerIndex = PLAYER2;
+      expect(game.pointIndexToPointNumber(0)).toBe(12);
+      expect(game.pointIndexToPointNumber(23)).toBe(24);
+      expect(game.pointIndexToPointNumber(11)).toBe(1);
+      expect(game.pointIndexToPointNumber(12)).toBe(13);
+    });
+
+    it('correctly converts the bar "point"', () => {
+      game.currentPlayerIndex = PLAYER1;
+      expect(game.pointIndexToPointNumber(BAR_POINT_NUMBER)).toBe(
+        BAR_POINT_NUMBER
+      );
+
+      game.currentPlayerIndex = PLAYER2;
+      expect(game.pointIndexToPointNumber(BAR_POINT_NUMBER)).toBe(
+        BAR_POINT_NUMBER
+      );
+    });
+  });
+
   describe('move', () => {
     it('rolls a normal move', () => {
       game = game.startTurn([5, 3]);
