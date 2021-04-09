@@ -4,7 +4,6 @@ import { useState } from 'react';
 import Die from './Die';
 import { NUM_DICE, NUM_DIE_FACES } from '../games/constants';
 
-// Disable the Roll button if dice have been rolled.
 const getRandomFace = () => 1 + Math.floor(Math.random() * NUM_DIE_FACES);
 const makeRoll = () => [getRandomFace(), getRandomFace()];
 
@@ -24,6 +23,7 @@ const DicePanel: React.FunctionComponent<Props> = ({ diceHaveBeenRolled, onRoll 
     setRoll(newRoll);
   };
 
+  // Disable the Roll button if dice have been rolled.
   return (
     <div className='dice-panel'>
       {dice}

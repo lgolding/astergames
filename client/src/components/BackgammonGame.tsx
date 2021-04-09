@@ -6,7 +6,12 @@ import Game from '../games/Game';
 interface Props {
 }
 
+export interface HandleMoveFn {
+  (fromPointNumber: number, toPointNumber: number): void
+}
+
 export const GameContext = React.createContext<Game>(new Game());
+export const HandleMoveContext = React.createContext<HandleMoveFn>(() => {});
 
 const BackgammonGame: React.FunctionComponent<Props> = () => {
   const [game, setGame] = useState(new Game());
@@ -28,9 +33,11 @@ const BackgammonGame: React.FunctionComponent<Props> = () => {
   return (
     <>
       <GameContext.Provider value={game}>
-        <div>Current player: {game.currentPlayerIndex + 1}</div>
-        <BackgammonBoard onMove={handleMove} />
-        <DicePanel onRoll={handleRoll} diceHaveBeenRolled={game.diceHaveBeenRolled()} />
+        <HandleMoveContext.Provider value={handleMove}>
+          <div>Current player: {game.currentPlayerIndex + 1}</div>
+          <BackgammonBoard />
+          <DicePanel onRoll={handleRoll} diceHaveBeenRolled={game.diceHaveBeenRolled()} />
+        </HandleMoveContext.Provider>
       </GameContext.Provider>
     </>
   );

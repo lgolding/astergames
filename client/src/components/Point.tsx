@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import _ from 'lodash';
-import { GameContext } from './BackgammonGame';
+import { GameContext, HandleMoveContext, HandleMoveFn } from './BackgammonGame';
 import Checker from './Checker';
 import CheckerColor from '../games/CheckerColor';
 import { DRAG_DROP_DATA_FORMAT } from './constants';
@@ -15,11 +15,11 @@ const BOTTOM_POINT_ROW = 3;
 
 interface Props {
   pointIndex: number;
-  onMove(fromPointNumber: number, toPointNumber: number): void;
 }
 
-const Point: React.FunctionComponent<Props> = ({ pointIndex, onMove }) => {
+const Point: React.FunctionComponent<Props> = ({ pointIndex }) => {
   const game: Game = useContext(GameContext);
+  const handleMove: HandleMoveFn = useContext(HandleMoveContext);
 
   const point = game.points[pointIndex];
   const currentPlayerIndex = game.currentPlayerIndex;
@@ -66,7 +66,7 @@ const Point: React.FunctionComponent<Props> = ({ pointIndex, onMove }) => {
       `Player ${currentPlayerIndex} dragged from point ${fromPointNumber} (index ${startPointIndex}) to point ${toPointNumber} (index ${pointIndex}).`
     );
 
-    onMove(fromPointNumber, toPointNumber);
+    handleMove(fromPointNumber, toPointNumber);
   };
 
   return (

@@ -1,5 +1,11 @@
 import Game from './Game';
-import { BAR_POINT_NUMBER, NUM_DICE, PLAYER1, PLAYER2 } from './constants';
+import {
+  BAR_POINT_NUMBER,
+  NO_PLAYER,
+  NUM_DICE,
+  PLAYER1,
+  PLAYER2,
+} from './constants';
 
 let game: Game;
 
@@ -225,6 +231,18 @@ describe('Game', () => {
       game = game.startTurn([6, 4]);
 
       expect(() => game.move(13, 7)).toThrow();
+    });
+
+    it('marks a point as "unoccupied" when the last checker is moved from it', () => {
+      expect(game.points[11].numCheckers).toBe(2);
+      expect(game.points[11].occupyingPlayerIndex).toBe(PLAYER1);
+
+      game = game.startTurn([1, 2]);
+      game = game.move(24, 23);
+      game = game.move(24, 22);
+
+      expect(game.points[11].numCheckers).toBe(0);
+      expect(game.points[11].occupyingPlayerIndex).toBe(NO_PLAYER);
     });
   });
 });

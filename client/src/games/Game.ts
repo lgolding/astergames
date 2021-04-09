@@ -1,6 +1,12 @@
 import _ from 'lodash';
 import produce, { immerable } from 'immer';
-import { BAR_POINT_NUMBER, PLAYER1, PLAYER2, NUM_DIE_FACES } from './constants';
+import {
+  BAR_POINT_NUMBER,
+  PLAYER1,
+  PLAYER2,
+  NUM_DIE_FACES,
+  NO_PLAYER,
+} from './constants';
 import PointModel from './PointModel';
 
 export default class Game {
@@ -158,6 +164,9 @@ export default class Game {
     const newGame = produce(this, draftGame => {
       if (fromPointIndex !== undefined) {
         --draftGame.points[fromPointIndex].numCheckers;
+        if (draftGame.points[fromPointIndex].numCheckers === 0) {
+          draftGame.points[fromPointIndex].occupyingPlayerIndex = NO_PLAYER;
+        }
       } else {
         // The checker was entered from the bar.
         --draftGame.bar[this.currentPlayerIndex];

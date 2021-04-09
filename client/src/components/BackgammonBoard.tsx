@@ -7,10 +7,9 @@ import Bar from './Bar';
 import { POINTS_ON_BOARD } from '../games/constants';
 
 interface Props {
-  onMove(fromPointNumber: number, toPointNumber: number): void;
 }
 
-const BackgammonBoard: React.FunctionComponent<Props> = ({ onMove }) => {
+const BackgammonBoard: React.FunctionComponent<Props> = () => {
   let pointIndices = _.range(POINTS_ON_BOARD);
 
   return (
@@ -26,7 +25,6 @@ const BackgammonBoard: React.FunctionComponent<Props> = ({ onMove }) => {
         <Point
           key={pointIndex}
           pointIndex={pointIndex}
-          onMove={onMove}
         />
       ))}
       {pointIndices
