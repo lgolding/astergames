@@ -1,11 +1,12 @@
 # Docs for the Azure Web Apps Deploy action: https://go.microsoft.com/fwlink/?linkid=2134798
 # More GitHub Actions for Azure: https://go.microsoft.com/fwlink/?linkid=2135048
 
-name: Build and deploy NodeJS app astergames to production
+env:
+  AZURE_WEBAPP_NAME: astergames
+  AZURE_WEBAPP_PACKAGE_PATH: client
+  NODE_VERSION: 14.x
 
-defaults:
-  run:
-    working-directory: client
+name: Build and deploy ${{ env.AZURE_WEBAPP_NAME }} to production
 
 on:
   push:
@@ -17,25 +18,24 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      # checkout the repo
-      - name: 'Checkout Github Action'
-        uses: actions/checkout@master
+      - name: Check out repo
+        uses: actions/checkout@main
 
       - name: Set up Node.js version
         uses: actions/setup-node@v1
         with:
-          node-version: '10.x'
+          node-version: ${{ env.NODE_VERSION }}
 
-      - name: npm install, build, and test
+      - name: Build and test
         run: |
           npm install
           npm run build --if-present
           npm run test --if-present
+        working-directory: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
-      - name: Run Azure webapp deploy action using publish profile credentials
+      - name: Deploy using publish profile credentials
         uses: azure/webapps-deploy@v2
         with:
-          app-name: astergames
-          slot-name: Production
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2775FB2FA1AE4FC8AA7F631A1B557FA1 }}
-          package: .
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
