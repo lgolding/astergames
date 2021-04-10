@@ -1,12 +1,12 @@
 # Docs for the Azure Web Apps Deploy action: https://go.microsoft.com/fwlink/?linkid=2134798
 # More GitHub Actions for Azure: https://go.microsoft.com/fwlink/?linkid=2135048
 
+name: Build and deploy astergames to production
+
 env:
   AZURE_WEBAPP_NAME: astergames
   AZURE_WEBAPP_PACKAGE_PATH: client
   NODE_VERSION: 14.x
-
-name: Build and deploy ${{ env.AZURE_WEBAPP_NAME }} to production
 
 on:
   push:
